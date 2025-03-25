@@ -1,21 +1,21 @@
-# Árbol de Huffman
+# Huffman Tree
 
-**¿Qué se persigue?**
+**What is the goal?**
 
-Es posible reducir significativamente el número de bits requeridos para representar un texto si, en lugar de emplear un código de longitud fija como ASCII, se emplea un codigo de longitud variable. En este caso, el número de bits requeridos puede variar de carácter en carácter. El objetivo es codificar los caracteres que aparecen más frecuentemente usando cadenas de bits más cortas. Sin embargo, cuando el código es de longitud variable se necesita algún método para determinar los bits de inicio y de fin de un código.
+It's possible to significantly reduce the number of bits required to represent text if, instead of using a fixed-length code like ASCII, a variable-length code is used. In this case, the number of bits required can vary from character to character. The goal is to encode the most frequently appearing characters using shorter bit strings. However, when the code is of variable length, some method is needed to determine the start and end bits of a code.
 
-La técnica de los códigos de Huffman nos permite construir códigos sin prefijos, que además serán óptimos, en el sentido de que se elegirán las menores longitudes de código para aquellos caracteres que aparezcan un mayor número de veces. El método de compresión/descompresión de datos consiste en lo siguiente:
+The Huffman coding technique allows us to construct prefix-free codes that will also be optimal, in the sense that shorter code lengths will be chosen for characters that appear more frequently. The data compression/decompression method consists of the following:
 
-- Calcular las frecuencias de todos los caracteres de un mensaje dado (tablad e frecuencias).
-- Construir el "árbol de Huffman" a partir de la tabla de frecuencias.
-- Construir una tabla de código de longitud variable utilizando el "árbol de Huffman".
-- Una vez obtenidos los código de cada carácter se codifica el mensaje.
-- El mensaje codificado se decodifica de forma directa usando el árbol de Huffman.
+- Calculate the frequencies of all characters in a given message (frequency table).
+- Build the "Huffman tree" from the frequency table.
+- Build a variable-length code table using the "Huffman tree".
+- Once the codes for each character are obtained, encode the message.
+- The encoded message is decoded directly using the Huffman tree.
 
-**¿Cómo está implementado?**
+**How is it implemented?**
 
-Un "árbol de Huffman" es un árbol binario que, o bien es un nodo hoja que contiene un carácter y su frecuencia, o bien está construido a partir de otros dos árboles de Huffman A1 y A2, hijo izquierdo y hijo derecho respectivamente y como frecuencia de la nueva raíz la suma de las frecuencias de A2 y A2. El código de un carácter viene dado por el camino desde la raíz hasta la hoja que contenga al carácter, de forma que para cada bit del código, un "0" significa ir al hijo izquierdo y un "1" ir al hijo derecho. El árbol se construye de forma que los códigos más cortos se corresponden con caracteres más frecuentes. Para esto, se utiliza una "cola de prioridad", que inicialmente contendrá los árboles hoja de la tabla de frecuencias. Mientras haya más de un árbol en la cola, saldrán los dos árboles menores y se insertará uno nuevo construido a partir de estos dos. Tendremos definida una relación de orden respecto a los árboles (se ordenan de forma directa comparando las frecuencias de los nodos raíz).
+A "Huffman tree" is a binary tree that is either a leaf node containing a character and its frequency, or is built from two other Huffman trees A1 and A2, left child and right child respectively, with the frequency of the new root being the sum of the frequencies of A1 and A2. The code for a character is given by the path from the root to the leaf containing the character, where for each bit of the code, a "0" means go to the left child and a "1" means go to the right child. The tree is constructed so that shorter codes correspond to more frequent characters. For this, a "priority queue" is used, which initially will contain the leaf trees from the frequency table. While there is more than one tree in the queue, the two smallest trees will be removed and a new one built from these two will be inserted. We will have defined an ordering relation with respect to the trees (they are ordered directly by comparing the frequencies of the root nodes).
 
-Se presenta un diseño capaz de realiza la codificación de ficheros de texto utilizando la técnica descrita, y capaz de decodificar ficheros previamente codificados con dicha técnica, obteniéndose así un fichero con el texto original.
+A design is presented capable of performing the encoding of text files using the described technique, and capable of decoding files previously encoded with this technique, thus obtaining a file with the original text.
 
 

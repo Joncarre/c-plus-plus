@@ -1,16 +1,16 @@
-# Rescantando escaladores
+# Rescuing Climbers
 
-Se pueden utilizar los árboles binarios para representar los caminos en la falda de una montaña. La raíz del árbol representa la cima de la que salen una o dos rutas. Las distintas rutas según se va ensanchando la falda de la montaña se dividen en dos formando caminos que nunca se volverán a conectar. Un escalador está en la cima de la montaña (raíz del árbol) y se da cuenta de que en distintas intersecciones (marcadas en el árbol con 'X') hay amigos que necesitan su ayuda para subir. Tiene que bajar a cada una de las 'X' y ayudarles a subir de uno en uno.
+Binary trees can be used to represent paths on a mountainside. The root of the tree represents the summit from which one or two routes emerge. The different routes, as the mountainside widens, split into two forming paths that will never reconnect. A climber is at the mountain summit (root of the tree) and realizes that at different intersections (marked in the tree with 'X') there are friends who need help climbing up. They must go down to each 'X' and help them climb up one by one.
 
-Se presenta un programa que, dado uno de estos árboles binarios, devuelve el tiempo que tardará el escalador en ayudar a todos esos amigos si cada tramos de intersección lleva una hora en ser recorrido (en cada uno de los dos sentidos).
+A program is presented that, given one of these binary trees, returns the time it will take the climber to help all these friends if each intersection segment takes one hour to traverse (in both directions).
 
-Es importante tener en cuenta que:
+It is important to consider that:
 
-- Los nodos vacíos se representan con '.'
-- Los nodos en los que hay amigos se representan con 'X'
-- Los nodos en los que no hay amigos ni son hoja se representan con 'N'
+- Empty nodes are represented with '.'
+- Nodes where there are friends are represented with 'X'
+- Nodes where there are no friends and are not leaves are represented with 'N'
 
-**Entrada de ejemplo**
+**Example Input**
 
     5
     N N X . . N . . X N . . X . .
@@ -19,7 +19,7 @@ Es importante tener en cuenta que:
     N X X . . X . . X X . . X . .
     N X . . N . .
 
-**Salida de ejemplo**
+**Example Output**
 
     4
     1

@@ -1,16 +1,16 @@
-# Árbol equilibrado
+# Balanced Tree
 
-Los árboles de búsqueda se comportan mejor si están equilibrados. Se entiende por árbol equilibrado aquél cuya talla de su hijo izquierdo y de su hijo derecho difieren a lo sumo en una unidad, y además ambos subárboles están equilibrados. Se presenta la clase de los árboles binarios que incorpora un nuevo método que decide en tiempo **lineal** si el árbol binario está equilibrado.
+Binary search trees perform better when they are balanced. A balanced tree is one where the size of its left child and right child differ by at most one unit, and both subtrees are also balanced. This presents a binary tree class that incorporates a new method that determines in **linear** time whether the binary tree is balanced.
 
-**Entrada de ejemplo**
+**Example Input**
 
     3
     2 1 -1 -1 3 -1 4 -1 -1
     1 -1 3 2 -1 -1 4 -1 -1
     4 1 -1 -1 3 -1 2 -1 -1
 
-**Salida de ejemplo**
+**Example Output**
 
-    SI
+    YES
     NO
     NO

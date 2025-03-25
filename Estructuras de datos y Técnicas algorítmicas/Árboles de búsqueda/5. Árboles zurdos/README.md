@@ -1,15 +1,15 @@
-# Árboles zurdos
+# Lefty Trees
 
-Dado un árbol binario, se llama *altura mínima* del árbol a la menor de sus distancias desde la raíz a un subárbol vacío. Se puede especificar formalmente mediante las ecuaciones:
+Given a binary tree, the *minimum height* of the tree is defined as the shortest distance from the root to an empty subtree. It can be formally specified using the equations:
 
-    hmin(avacio)          = 0
-    hmin(cons(i, x, d))   = 1 + min(hmin(i), hmin(d))
+    hmin(empty)           = 0
+    hmin(cons(l, x, r))   = 1 + min(hmin(l), hmin(r))
     
-Se dice que un árbol binario es *zurdo* si o, bien es vacío, o si no lo es, ambos hijos son zurdos y la altura mínima del hijo izquierdo nunca es menor que la del hijo derecho.
+A binary tree is called *lefty* if it is either empty, or if it's not empty, both children are lefty and the minimum height of the left child is never less than that of the right child.
 
-Se presenta una solución de coste lineal respecto al número de nodos que, dado un árbol binario, determina si es o no zurdo.
+A solution with linear cost relative to the number of nodes is presented, which determines whether a given binary tree is lefty or not.
 
-**Entrada de ejemplo**
+**Example Input**
 
      6
      0 0 0 -1 -1 -1 -1 
@@ -19,11 +19,11 @@ Se presenta una solución de coste lineal respecto al número de nodos que, dado
      0 0 -1 0 -1 -1 0 -1 -1
      0 -1 0 -1 0 -1 -1
 
-**Salida de ejemplo**
+**Example Output**
 
-     SI
-     SI
-     SI
-     SI
+     YES
+     YES
+     YES
+     YES
      NO
      NO
