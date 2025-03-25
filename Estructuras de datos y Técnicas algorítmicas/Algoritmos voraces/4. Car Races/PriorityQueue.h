@@ -1,11 +1,11 @@
 //
 //  PriorityQueue.h
 //
-//  Implementación de colas con prioridad mediante montículos
+//  Implementation of priority queues using heaps
 //
-//  Técnicas Algoritmicas en Ingeniería del Software / Diseño de Algoritmos
-//  Facultad de Informática
-//  Universidad Complutense de Madrid
+//  Algorithmic Techniques in Software Engineering / Algorithm Design
+//  Faculty of Computer Science
+//  Complutense University of Madrid
 //
 //  Created by Alberto Verdejo on 26/6/15.
 //  Copyright (c) 2015 Alberto Verdejo. All rights reserved.
@@ -21,14 +21,14 @@
 
 const size_t TAM_INICIAL = 100;
 
-// Comparator dice cuándo un valor de tipo T es más prioritario que otro
+// Comparator specifies when a value of type T has higher priority than another
 template <typename T = int, typename Comparator = std::less<T>>
 class PriorityQueue {
 public:
 
 	PriorityQueue(size_t t = TAM_INICIAL, Comparator c = Comparator());
 
-	/** Constructor a partir de un vector de elementos */
+	/** Constructor from a vector of elements */
 	PriorityQueue(std::vector<T> const& v_ini, Comparator c = Comparator());
 
 	PriorityQueue(PriorityQueue<T, Comparator> const&) = default;
@@ -42,49 +42,49 @@ public:
 	~PriorityQueue() = default;
 
 
-	/** Insertar el elemento x (que incluye su prioridad).
-	Si no hay espacio, el array se agranda. */
+	/** Insert element x (which includes its priority).
+	If there is no space, the array will be expanded. */
 	void push(T const& x);
 	void push(T && x);
 
-	/** Devuelve el número de elementos en la cola. */
+	/** Returns the number of elements in the queue. */
 	size_t size() const { return numElems; }
 
 	bool empty() const { return (numElems == 0); }
 
-	/* Si la cola no es vacía, devuelve el elemento más prioritario. */
+	/* If the queue is not empty, returns the highest priority element. */
 	T const& top() const;
 
-	/* Si la cola no es vacía, elimina el elemento más prioritario. */
+	/* If the queue is not empty, removes the highest priority element. */
 	void pop();
 
-	/* Si la cola no es vacía, elimina y devuelve el elemento más prioritario. */
+	/* If the queue is not empty, removes and returns the highest priority element. */
 	void pop(T & prim);
 
-	/* Muestra el montículo por la salida o */
+	/* Displays the heap via output stream o */
 	void print(std::ostream& o = std::cout) const;
 
 
 private:
 
-	/** Vector que contiene los datos */
-	std::vector<T> array;     // primer elemento en la posición 1
+	/** Vector containing the data */
+	std::vector<T> array;     // first element at position 1
 
-	/** Número de elementos en el montículo */
+	/** Number of elements in the heap */
 	size_t numElems;
 
-	/** Objeto función que sabe comparar elementos.
-	* antes(a,b) es cierto si a es más prioritario que b (a debe salir antes que b)
+	/** Function object that knows how to compare elements.
+	* antes(a,b) is true if a has higher priority than b (a should come out before b)
 	*/
 	Comparator antes;
 
-	/* Flota el elemento situado en la posición n del montículo. */
+	/* Moves the element at position n of the heap upward. */
 	void flotar(size_t n);
 
-	/* Hunde el elemento situado en la posición n del montículo. */
+	/* Moves the element at position n of the heap downward. */
 	void hundir(size_t n);
 
-	/* convierte un array en un montículo */
+	/* Converts an array into a heap */
 	void monticulizar();
 };
 
@@ -94,8 +94,8 @@ inline std::ostream& operator<<(std::ostream & o, PriorityQueue<T, Comparator> c
 	return o;
 }
 
-/** Función para construir una cola con prioridad cuyo Comparator es una lambda. */
-template<typename T, typename Comparator> // el tipo Comparator se deduce a partir de c
+/** Function to build a priority queue whose Comparator is a lambda. */
+template<typename T, typename Comparator> // the Comparator type is deduced from c
 inline PriorityQueue<T, Comparator> make_priorityqueue(Comparator c, size_t tam = TAM_INICIAL)
 {
 	return PriorityQueue<T, Comparator>(tam, c);
@@ -117,7 +117,7 @@ array(2 * v_ini.size()), numElems(v_ini.size()), antes(c) {
 
 template <typename T, typename Comparator>
 void PriorityQueue<T, Comparator>::push(T const& x) {
-	if (numElems == array.size() - 1)  // si el array se ha llenado se aumenta el tamaño
+	if (numElems == array.size() - 1)  // if the array is full, increase its size
 		array.resize(array.size() * 2);
 	++numElems;
 	array[numElems] = x;
@@ -125,7 +125,7 @@ void PriorityQueue<T, Comparator>::push(T const& x) {
 }
 template <typename T, typename Comparator>
 void PriorityQueue<T, Comparator>::push(T && x) {
-	if (numElems == array.size() - 1)  // si el array se ha llenado se aumenta el tamaño
+	if (numElems == array.size() - 1)  // if the array is full, increase its size
 		array.resize(array.size() * 2);
 	++numElems;
 	array[numElems] = std::move(x);
@@ -134,13 +134,13 @@ void PriorityQueue<T, Comparator>::push(T && x) {
 
 template <typename T, typename Comparator>
 T const& PriorityQueue<T, Comparator>::top() const {
-	if (empty()) throw std::domain_error("No se puede consultar el primero de una cola vacía.");
+	if (empty()) throw std::domain_error("Cannot access the first element of an empty queue.");
 	else return array[1];
 }
 
 template <typename T, typename Comparator>
 void PriorityQueue<T, Comparator>::pop() {
-	if (empty()) throw std::domain_error("Imposible eliminar el primero de una cola vacía");
+	if (empty()) throw std::domain_error("Cannot remove the first element of an empty queue");
 	else {
 		array[1] = std::move(array[numElems]);
 		--numElems;
@@ -150,7 +150,7 @@ void PriorityQueue<T, Comparator>::pop() {
 
 template <typename T, typename Comparator>
 void PriorityQueue<T, Comparator>::pop(T & prim) {
-	if (empty()) throw std::domain_error("Imposible eliminar el primero de una cola vacía");
+	if (empty()) throw std::domain_error("Cannot remove the first element of an empty queue");
 	else {
 		prim = std::move(array[1]);
 		array[1] = std::move(array[numElems]);
@@ -180,12 +180,12 @@ template <typename T, typename Comparator>
 void PriorityQueue<T, Comparator>::hundir(size_t n) {
 	T elem = std::move(array[n]);
 	size_t hueco = n;
-	size_t hijo = 2 * hueco; // hijo izquierdo, si existe
+	 // left child, if it exists
 	while (hijo <= numElems)  {
-		// cambiar al hijo derecho si existe y va antes que el izquierdo
+		// switch to the right child if it exists and has higher priority than the left
 		if (hijo < numElems && antes(array[hijo + 1], array[hijo]))
 			++hijo;
-		// flotar el hijo si va antes que el elemento hundiéndose
+		// float the child if it has higher priority than the sinking element
 		if (antes(array[hijo], elem)) {
 			array[hueco] = std::move(array[hijo]);
 			hueco = hijo; hijo = 2 * hueco;
