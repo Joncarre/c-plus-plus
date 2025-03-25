@@ -10,7 +10,7 @@ using namespace std;
 
 bool resuelve();
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de elementos en la entrada (esquidadores y esquís)
+// Complexity: O(N), where N is the number of elements in the input (skiers and skis)
 bool resuelve(){
 	PriorityQueue<int> altura;
 	PriorityQueue<int> longitud;
@@ -20,16 +20,16 @@ bool resuelve(){
 	if (entrada == 0)
 		return false;
 
-	for (size_t i = 0; i < entrada; i++){ // Llenamos la cola de alturas
+	for (size_t i = 0; i < entrada; i++){ // Fill the height queue
 		cin >> alt;
 		altura.push(alt);
 	}
-	for (size_t i = 0; i < entrada; i++){ // Llenamos la cola de longitudes
+	for (size_t i = 0; i < entrada; i++){ // Fill the length queue
 		cin >> lon;
 		longitud.push(lon);
 	}
 	for (size_t i = 0; i < entrada; i++){
-		// Vamos acumulando la diferencia entre alturas y longitudes (por prioridades)
+		// We accumulate the difference between heights and lengths (by priority)
 		diferencias = diferencias + abs(longitud.top() - altura.top());
 		longitud.pop();
 		altura.pop();

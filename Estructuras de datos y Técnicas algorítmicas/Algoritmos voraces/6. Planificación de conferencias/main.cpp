@@ -15,12 +15,12 @@ typedef struct{
 
 void resuelve(int numConferencias);
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(1)
+// Complexity: O(1)
 bool operator <(tConferencia a, tConferencia b){
 	return a.inicio < b.inicio;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), por la operación 'sort'
+// Complexity: O(N*logN), due to the 'sort' operation
 void resuelve(int numConferencias){
 	int minSalas = 1;
 

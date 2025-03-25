@@ -7,7 +7,7 @@ using namespace std;
 
 bool resuelve();
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de agujeros en la manguera
+// Complexity: O(N), where N is the number of holes in the hose
 bool resuelve(){
 	size_t N, L, agujeroActual, agujeroSiguiente, distancia, longParche, numParches;
 
@@ -20,12 +20,12 @@ bool resuelve(){
 	for (size_t i = 1; i < N; i++){
 		cin >> agujeroSiguiente;
 		distancia = agujeroSiguiente - agujeroActual;
-		if (distancia > longParche){ // Si la distancia a cubrir es mayor que la del parche...
-			numParches++; // Hace falta poner otro parche
-			longParche = L; // Cuya medida es la propia medida del parche
+		if (distancia > longParche){ // If the distance to cover is greater than the patch length...
+			numParches++; // Another patch is needed
+			longParche = L; // With a measure equal to the patch length
 		}
 		else
-			longParche = longParche - distancia; // Acortamos el parche y puede que nos sirva para tapar el próximo agujero
+			longParche = longParche - distancia; // We reduce the patch length and it might be useful for covering the next hole
 		agujeroActual = agujeroSiguiente;
 	}
 	cout << numParches << endl;

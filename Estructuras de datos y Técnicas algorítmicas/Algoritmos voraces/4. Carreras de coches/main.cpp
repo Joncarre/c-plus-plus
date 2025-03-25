@@ -10,7 +10,7 @@ using namespace std;
 
 void resuelve();
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N logN), donde N es el número de pilas de cada caso
+// Complexity: O(N logN), where N is the number of batteries in each case
 void resuelve(){
 	int numCasos, voltaje, numPilas, pila, funcionando, comienzo, final;
 
@@ -20,16 +20,16 @@ void resuelve(){
 		vector<int> vectorPilas(numPilas);
 		for (int i = 0; i < numPilas; i++){
 			cin >> pila;
-			vectorPilas[i] = pila; // Metemos todas las pilas en el vector
+			vectorPilas[i] = pila; // Put all batteries in the vector
 		}
-		sort(vectorPilas.begin(), vectorPilas.end()); // Ordenamos el vector de menor a mayor
-		// Inicializamos los índices que van a recorrer el vector
+		sort(vectorPilas.begin(), vectorPilas.end()); // Sort the vector from lowest to highest
+		// Initialize the indices that will traverse the vector
 		comienzo = 0;
 		final = numPilas - 1;
-		// La idea es ir emparejando la pila de mayor voltaje con la de menor voltaje y, si no es suficiente, aumentar el índice menor
-		// para coger una pila con más voltaje que la anterior
-		while (comienzo < final){ // Cuando los índices se crucen, se terminó el recorrido del vector
-			if (vectorPilas[comienzo] + vectorPilas[final] >= voltaje){ // Si las dos pilas escogidas son suficientes...
+		// The idea is to pair the battery with the highest voltage with the one with the lowest voltage and, if not sufficient, increase the lower index
+		// to get a battery with more voltage than the previous one
+		while (comienzo < final){ // When the indices cross, the vector traversal is finished
+			if (vectorPilas[comienzo] + vectorPilas[final] >= voltaje){ // If the two chosen batteries are sufficient...
 				comienzo++;
 				final--;
 				funcionando++;
