@@ -1,0 +1,39 @@
+5
+A
+a
+2 3 0
+6 0 0
+1462916384
+
+_X_X_X_
+B
+b
+2 -2 0
+9 2 0
+1462916421
+
+Has perdido una partida contra A el 2016/05/10
+Has perdido una partida contra C el 2016/05/10
+_X_X_X_
+C
+c
+0 1 1
+2 2 0
+1462916456
+Ha ganado por abandono una partida contra G el 2016/03/16.
+Has ganado una partida contra B el 2016/05/10
+_X_X_X_
+E
+a
+0 0 0
+0 0 0
+1462916375
+
+_X_X_X_
+G
+g
+0 2 0
+2 0 0
+1462916501
+
+_X_X_X_
