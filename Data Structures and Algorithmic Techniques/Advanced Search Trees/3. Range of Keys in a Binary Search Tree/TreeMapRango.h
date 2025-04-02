@@ -1,8 +1,8 @@
 //
 //  TreeMapRango.h
 //
-//  Extensión de tablas <clave, valor> como árboles de búsqueda AVL
-//  con una operación para consultar las claves en un rango
+//  Extension of <key, value> tables as AVL search trees
+//  with an operation to query keys in a range
 //
 
 #ifndef TREEMAPRANGO_H_
@@ -20,10 +20,10 @@ public:
 
 	std::vector<Clave> rango(Clave const& k1, Clave const& k2) const {
 
-		// Lista vacía.
+		// Empty list.
 		std::vector<Clave> lista;
 
-		// Rango.
+		// Range.
 		rango(k1, k2,  this->raiz, lista);
 
 		return lista;
@@ -34,28 +34,28 @@ protected:
     using Link = TreeNode *;
 
 	/*
-	*	Función que realiza las podas necesarias para ir encontrando los elementos que estén
-	*	dentro del intervalo que hayamos establecido con k1 y k2. Además, si el elemento está 
-	*	en ese intervalo, lo introduce en el vector (lista). Su complejidad viene dada por el tamaño
-	*	del árbol pero no será lineal ya que la poda permite reducir esa complejidad.
+	*	Function that performs the necessary pruning to find elements that are
+	*	within the interval established with k1 and k2. Additionally, if the element is
+	*	in that interval, it adds it to the vector (list). Its complexity is given by the size
+	*	of the tree but won't be linear since pruning allows reducing that complexity.
 	*
-	*	Complejidad: O(log n)
+	*	Complexity: O(log n)
 	*/
     void rango(Clave const& k1, Clave const& k2, Link a, std::vector<Clave> & lista) const {
 		
-		// Raíz no es vacío.
+		// Root is not empty.
 		if (a!=nullptr){
-			// Si clave < k1 entonces podamos hijo_Iz.
+			// If key < k1 then prune left child.
 			if (this->menor(a->cv.clave, k1)){
 					
 					rango(k1, k2, a->dr, lista);
-			}// Si Clave > k2 entonces podamos hijo_Dr.
+			}// If Key > k2 then prune right child.
 			else if (this->menor(k2, a->cv.clave)){
 					
 					rango(k1, k2, a->iz, lista);			
 			}
 			else {
-				// Si esta en el Rango.
+				// If it's in the Range.
 				rango(k1, k2, a->iz, lista);
 				lista.push_back(a->cv.clave);
 				rango(k1, k2, a->dr, lista);

@@ -1,11 +1,11 @@
 //
 //  TreeMap_RB.h
 //
-//  Implementación de tablas <clave, valor> como ABB rojinegros inclinados a la izquierda
+//  Implementation of <key, value> tables as left-leaning Red-Black BST
 //
-//  Técnicas Algoritmicas en Ingeniería del Software / Diseño de Algoritmos
-//  Facultad de Informática
-//  Universidad Complutense de Madrid
+//  Algorithmic Techniques in Software Engineering / Algorithm Design
+//  Faculty of Computer Science
+//  Complutense University of Madrid
 //
 //  Created by Alberto Verdejo on 30/6/15.
 //  Copyright (c) 2015 Alberto Verdejo. All rights reserved.
@@ -55,16 +55,16 @@ public:
 
 protected:
 	/**
-	Clase nodo que almacena internamente la pareja (clave, valor),
-	los punteros al hijo izquierdo y al hijo derecho, y la altura.
+	Node class that internally stores the (key, value) pair,
+	pointers to the left and right children, and the height.
 	*/
 	class TreeNode;
 	using Link = TreeNode *;
 
-	/** Puntero a la raíz de la estructura jerárquica de nodos. */
+	/** Pointer to the root of the hierarchical node structure. */
 	Link raiz;
 
-	/** Objeto función que compara elementos. */
+	/** Function object that compares elements. */
 	Comparador menor;
 
 public:
@@ -266,17 +266,17 @@ typename TreeMap<Clave, Valor, Comparador>::Link TreeMap<Clave, Valor, Comparado
 
 template <typename Clave, typename Valor, typename Comparador>
 void TreeMap<Clave, Valor, Comparador>::Iterator::next() {
-	if (act_ == nullptr) throw std::out_of_range("El iterador no se puede avanzar");
+	if (act_ == nullptr) throw std::out_of_range("Iterator cannot be advanced");
 
-	// Si hay hijo derecho, saltamos al primero
-	// en inorden del hijo derecho
+	// If there is a right child, jump to the first
+	// in-order element of the right child
 	if (act_->dr)
 		act_ = first(act_->dr);
 	else {
-		// Si no, vamos al primer ascendiente
-		// no visitado. Para eso consultamos
-		// la pila; si ya est· vacÌa, no quedan
-		// ascendientes por visitar
+		// If not, go to the first unvisited
+		// ancestor. For that we check the
+		// stack; if it's already empty, there are no
+		// ancestors left to visit
 		if (ancestors.empty())
 			act_ = nullptr;
 		else {
@@ -332,7 +332,7 @@ void TreeMap<Clave, Valor, Comparador>::insertar(Clave const& clave, Valor const
 		else if (menor(a->clave, clave)) {
 			insertar(clave, valor, a->dr);
 		}
-		else { // la clave ya está, se modifica el valor asociado
+		else { // the key already exists, associated value is modified
 			a->valor = valor;
 		}
 		// fix right-leaning reds

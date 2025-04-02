@@ -1,11 +1,11 @@
 //
 //  TreeMap_AVL.h
 //
-//  Implementación de tablas <clave, valor> como árboles de búsqueda AVL
+//  Implementation of <key, value> tables as AVL search trees
 //
-//  Técnicas Algoritmicas en Ingeniería del Software / Diseño de Algoritmos
-//  Facultad de Informática
-//  Universidad Complutense de Madrid
+//  Algorithmic Techniques in Software Engineering / Algorithm Design
+//  Faculty of Computer Science
+//  Complutense University of Madrid
 //
 //  Created by Alberto Verdejo on 30/6/15.
 //  Copyright (c) 2015 Alberto Verdejo. All rights reserved.
@@ -60,16 +60,16 @@ public:
 
 protected:
 	/**
-	Clase nodo que almacena internamente la pareja (clave, valor),
-	los punteros al hijo izquierdo y al hijo derecho, y la altura.
+	Node class that internally stores the pair (key, value),
+	pointers to left and right child, and height.
 	*/
 	class TreeNode;
 	using Link = TreeNode *;
 
-	/** Puntero a la raíz de la estructura jerárquica de nodos. */
+	/** Pointer to the root of the hierarchical node structure. */
 	Link raiz;
 
-	/** Objeto función que compara elementos. */
+	/** Function object that compares elements. */
 	Comparador menor;
 
 public:
@@ -193,7 +193,7 @@ template <typename Clave, typename Valor, typename Comparador>
 Valor const& TreeMap<Clave, Valor, Comparador>::at(Clave const& clave) const {
 	Link p = buscar(clave, raiz);
 	if (p == nullptr)
-		throw std::out_of_range("La clave no se puede consultar");
+		throw std::out_of_range("The key cannot be accessed");
 	return p->cv.valor;
 }
 
@@ -267,17 +267,17 @@ typename TreeMap<Clave, Valor, Comparador>::Link TreeMap<Clave, Valor, Comparado
 
 template <typename Clave, typename Valor, typename Comparador>
 void TreeMap<Clave, Valor, Comparador>::Iterator::next() {
-	if (act_ == nullptr) throw std::out_of_range("El iterador no se puede avanzar");
+	if (act_ == nullptr) throw std::out_of_range("Iterator cannot be advanced");
 
-	// Si hay hijo derecho, saltamos al primero
-	// en inorden del hijo derecho
+	// If there's a right child, jump to the first
+	// in inorder of the right child
 	if (act_->dr)
 		act_ = first(act_->dr);
 	else {
-		// Si no, vamos al primer ascendiente
-		// no visitado. Para eso consultamos
-		// la pila; si ya est· vacÌa, no quedan
-		// ascendientes por visitar
+		// If not, go to the first ancestor
+		// not visited. For that we check
+		// the stack; if it's already empty, there are no
+		// more ancestors to visit
 		if (ancestors.empty())
 			act_ = nullptr;
 		else {
@@ -340,7 +340,7 @@ void TreeMap<Clave, Valor, Comparador>::insertar(ClaveValor const& cv, Link & a)
 		insertar(cv, a->dr);
 		reequilibraIzq(a);
 	}
-	else { // la clave ya está, se actualiza el valor asociado
+	else { // the key already exists, the associated value is updated
 		a->cv.valor = cv.valor;
 	}
 }

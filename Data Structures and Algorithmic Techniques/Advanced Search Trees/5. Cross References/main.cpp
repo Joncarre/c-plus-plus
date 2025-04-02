@@ -14,7 +14,7 @@ void resuelve(int lineas);
 TreeMap<string, vector<int>> leerArbol(int lineas);
 
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de caracteres (podría mejorarse si vamos leyendo palabra por palabra)
+// Complexity: O(N), where N is the number of characters (could be improved if we read word by word)
 TreeMap<string, vector<int>> leerArbol(int lineas){
 	TreeMap<string, vector<int>> arbol;
 	string linea;
@@ -30,23 +30,23 @@ TreeMap<string, vector<int>> leerArbol(int lineas){
 				palabra.push_back(tolower(linea[indice]));
 				indice++;
 			} while (linea[indice] != ' ');
-			indice++; // Leemos el espacio entre palabras
-			if (palabra.length() > 2){ // Si la palabra tiene más de 2 letras...
-				if (arbol.contains(palabra)){ // Si la palabra ya está en el árbol...
+			indice++; // Read the space between words
+			if (palabra.length() > 2){ // If the word has more than 2 letters...
+				if (arbol.contains(palabra)){ // If the word is already in the tree...
 					bool encontrado = false;
 					int j = 0;
 					vector<int> lista = arbol.at(palabra);
-					while (j < lista.size()){ // Buscaremos en TODO el vector para ver si ha aparecido en esta línea
-						if (lista[j] == i + 1) // Si la palabra ya ha aparecido en la línea actual...
+					while (j < lista.size()){ // We will search the ENTIRE vector to see if it has appeared in this line
+						if (lista[j] == i + 1) // If the word has already appeared in the current line...
 							encontrado = true;
 						j++;
 					}
 					if (!encontrado){
-						lista.push_back(i + 1); // Metemos la nueva línea en la que aparece la palabra
-						arbol.insert(palabra, lista); // Y actualizamos el nodo del árbol
+						lista.push_back(i + 1); // Add the new line where the word appears
+						arbol.insert(palabra, lista); // And update the tree node
 					}
 				}
-				else{ // Si la palabra no está en el árbol...
+				else{ // If the word is not in the tree...
 					vector<int> nuevaLista;
 					nuevaLista.push_back(i + 1);
 					arbol.insert(palabra, nuevaLista);
@@ -57,7 +57,7 @@ TreeMap<string, vector<int>> leerArbol(int lineas){
 	return arbol;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), por la llamada a leerArbol()
+// Complexity: O(N), due to the call to leerArbol()
 void resuelve(int lineas){
 	TreeMap<string, vector<int>> arbol;
 	arbol = leerArbol(lineas);

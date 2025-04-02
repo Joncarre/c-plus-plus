@@ -1,73 +1,72 @@
 /**
   @file Arbin.h
 
-  Implementación dinámica del TAD Arbol Binario.
+  Dynamic Implementation of the Binary Tree ADT.
 
-  Estructura de Datos y Algoritmos
-  Facultad de Informática
-  Universidad Complutense de Madrid
+  Data Structures and Algorithms
+  Faculty of Computer Science
+  Complutense University of Madrid
 
- (c) Marco Antonio Gómez Martín, 2012
+ (c) Marco Antonio GÃ³mez MartÃ­n, 2012
 */
 #ifndef __ARBIN_H
 #define __ARBIN_H
 
 #include "Excepciones.h"
 
-#include "Lista.h" // Tipo devuelto por los recorridos
+#include "Lista.h" // Type returned by tree traversals
 
-#include "Cola.h" // Tipo auxiliar para implementar el recorrido por niveles
+#include "Cola.h" // Auxiliary type for implementing level-order traversal
 
 /**
- Implementación dinámica del TAD Arbin utilizando 
- nodos con un puntero al hijo izquierdo y otro al
- hijo derecho. La implementación permite compartición
- de estructura, manteniendola bajo control mediante
- conteo de referencias. La implementación, sin embargo,
- es bastante artesanal, pues para no complicar el código
- excesivamente no se ha hecho uso de punteros inteligentes
- que incrementen y decrementen automáticamente esas
- referencias.
+ Dynamic implementation of the Binary Tree ADT using
+ nodes with pointers to left and right children. The
+ implementation allows structure sharing, keeping it
+ under control through reference counting. However,
+ the implementation is quite artisanal, as smart pointers
+ that automatically increment and decrement these
+ references have not been used to avoid complicating
+ the code excessively.
 
- Las operaciones son:
+ The operations are:
 
- - ArbolVacio: -> Arbin. Generadora implementada en el
-   constructor sin parámetros.
- - Cons: Arbin, Elem, Arbin -> Arbin. Generadora implementada
-   en un constructor con tres parámetros.
- - hijoIz, hijoDr: Arbin - -> Arbin. Observadoras que
-   devuelven el hijo izquiero o derecho de un árbol.
- - esVacio: Arbin -> Bool. Observadora que devuelve si
-   un árbol binario es vacío.
+ - EmptyTree: -> Arbin. Generator implemented in the
+   parameterless constructor.
+ - Cons: Arbin, Elem, Arbin -> Arbin. Generator implemented
+   in a constructor with three parameters.
+ - leftChild, rightChild: Arbin -> Arbin. Observers that
+   return the left or right child of a tree.
+ - isEmpty: Arbin -> Bool. Observer that returns whether
+   a binary tree is empty.
 
- @author Marco Antonio Gómez Martín
+ @author Marco Antonio GÃ³mez MartÃ­n
  */
 template <class T>
 class Arbin {
 public:
 
-	/** Constructor; operacion ArbolVacio */
+	/** Constructor; EmptyTree operation */
 	Arbin() : _ra(NULL) {
 	}
 
-	/** Constructor; operacion Cons */
+	/** Constructor; Cons operation */
 	Arbin(const Arbin &iz, const T &elem, const Arbin &dr) :
 		_ra(new Nodo(iz._ra, elem, dr._ra)) {
 		_ra->addRef();
 	}
 
-	/** Destructor; elimina la estructura jerárquica de nodos. */
+	/** Destructor; eliminates the hierarchical structure of nodes. */
 	~Arbin() {
 		libera();
 		_ra = NULL;
 	}
 
 	/**
-	 Devuelve el elemento almacenado en la raiz
+	 Returns the element stored at the root
 
-	 raiz(Cons(iz, elem, dr)) = elem
-	 error raiz(ArbolVacio)
-	 @return Elemento en la raíz.
+	 root(Cons(left, elem, right)) = elem
+	 error root(EmptyTree)
+	 @return Element at the root.
 	 */
 	const T &raiz() const {
 		if (esVacio())
@@ -76,11 +75,11 @@ public:
 	}
 
 	/**
-	 Devuelve un árbol copia del árbol izquierdo.
-	 Es una operación parcial (falla con el árbol vacío).
+	 Returns a copy of the left subtree.
+	 It's a partial operation (fails with an empty tree).
 
-	 hijoIz(Cons(iz, elem, dr)) = iz
-	 error hijoIz(ArbolVacio)
+	 leftChild(Cons(left, elem, right)) = left
+	 error leftChild(EmptyTree)
 	*/
 	Arbin hijoIz() const {
 		if (esVacio())
@@ -90,11 +89,11 @@ public:
 	}
 
 	/**
-	 Devuelve un árbol copia del árbol derecho.
-	 Es una operación parcial (falla con el árbol vacío).
+	 Returns a copy of the right subtree.
+	 It's a partial operation (fails with an empty tree).
 
-	 hijoDr(Cons(iz, elem, dr)) = dr
-	 error hijoDr(ArbolVacio)
+	 rightChild(Cons(left, elem, right)) = right
+	 error rightChild(EmptyTree)
 	*/
 	Arbin hijoDr() const {
 		if (esVacio())
@@ -104,18 +103,18 @@ public:
 	}
 
 	/**
-	 Operación observadora que devuelve si el árbol
-	 es vacío (no contiene elementos) o no.
+	 Observer operation that returns whether the tree
+	 is empty (contains no elements) or not.
 
-	 esVacio(ArbolVacio) = true
-	 esVacio(Cons(iz, elem, dr)) = false
+	 isEmpty(EmptyTree) = true
+	 isEmpty(Cons(left, elem, right)) = false
 	 */
 	bool esVacio() const {
 		return _ra == NULL;
 	}
 
 	// //
-	// RECORRIDOS SOBRE EL ÁRBOL
+	// TRAVERSALS ON THE TREE
 	// //
 
 	Lista<T> preorden() const {
@@ -159,41 +158,40 @@ public:
 	}
 
 	// //
-	// OTRAS OPERACIONES OBSERVADORAS
+	// OTHER OBSERVER OPERATIONS
 	// //
 
 	/**
-	 Devuelve el número de nodos de un árbol.
+	 Returns the number of nodes in a tree.
 	 */
 	unsigned int numNodos() const {
 		return numNodosAux(_ra);
 	}
 
 	/**
-	 Devuelve la talla del árbol.
+	 Returns the height of the tree.
 	 */
 	unsigned int talla() const {
 		return tallaAux(_ra);
 	}
 
 	/**
-	 Devuelve el número de hojas de un árbol.
+	 Returns the number of leaves in a tree.
 	 */
 	unsigned int numHojas() const {
 		return numHojasAux(_ra);
 	}
 
 	// //
-	// MÉTODOS DE "FONTANERÍA" DE C++ QUE HACEN VERSÁTIL
-	// A LA CLASE
+	// C++ "PLUMBING" METHODS THAT MAKE THE CLASS VERSATILE
 	// //
 
-	/** Constructor copia */
+	/** Copy constructor */
 	Arbin(const Arbin<T> &other) : _ra(NULL) {
 		copia(other);
 	}
 
-	/** Operador de asignación */
+	/** Assignment operator */
 	Arbin<T> &operator=(const Arbin<T> &other) {
 		if (this != &other) {
 			libera();
@@ -202,7 +200,7 @@ public:
 		return *this;
 	}
 
-	/** Operador de comparación. */
+	/** Comparison operator. */
 	bool operator==(const Arbin<T> &rhs) const {
 		return comparaAux(_ra, rhs._ra);
 	}
@@ -214,9 +212,9 @@ public:
 protected:
 
 	/**
-	 Clase nodo que almacena internamente el elemento (de tipo T),
-	 y los punteros al hijo izquierdo y al hijo derecho, así
-	 como el número de referencias que hay.
+	 Node class that internally stores the element (of type T),
+	 pointers to the left and right children, as well as
+	 the number of references.
 	 */
 	class Nodo {
 	public:
@@ -240,11 +238,11 @@ protected:
 	};
 
 	/**
-	 Constructor protegido que crea un árbol
-	 a partir de una estructura jerárquica existente.
-	 Esa estructura jerárquica SE COMPARTE, por lo que
-	 se añade la referencia.
-	 Se utiliza en hijoIz e hijoDr.
+	 Protected constructor that creates a tree
+	 from an existing hierarchical structure.
+	 That hierarchical structure is SHARED, so
+	 the reference is added.
+	 It is used in leftChild and rightChild.
 	 */
 	Arbin(Nodo *raiz) : _ra(raiz) {
 		if (_ra != NULL)
@@ -263,7 +261,7 @@ protected:
 	}
 
 	// //
-	// MÉTODOS AUXILIARES PARA LOS RECORRIDOS
+	// AUXILIARY METHODS FOR TRAVERSALS
 	// //
 	
 	static void preordenAcu(Nodo *ra, Lista<T> &acu) {
@@ -294,8 +292,7 @@ protected:
 	}
 
 	// //
-	// MÉTODOS AUXILIARES (RECURSIVOS) DE OTRAS OPERACIONES
-	// OBSERVADORAS
+	// AUXILIARY (RECURSIVE) METHODS FOR OTHER OBSERVER OPERATIONS
 	// //
 
 	static unsigned int numNodosAux(Nodo *ra) {
@@ -329,10 +326,9 @@ protected:
 private:
 
 	/**
-	 Elimina todos los nodos de una estructura arbórea
-	 que comienza con el puntero ra.
-	 Se admite que el nodo sea NULL (no habrá nada que
-	 liberar).
+	 Deletes all nodes of a tree structure
+	 that begins with the pointer ra.
+	 The node can be NULL (there will be nothing to free).
 	 */
 	static void libera(Nodo *ra) {
 		if (ra != NULL) {
@@ -346,17 +342,16 @@ private:
 	}
 
 	/**
-	 Compara dos estructuras jerárquicas de nodos,
-	 dadas sus raices (que pueden ser NULL).
+	 Compares two hierarchical node structures,
+	 given their roots (which can be NULL).
 	 */
 	static bool comparaAux(Nodo *r1, Nodo *r2) {
 		if (r1 == r2)
 			return true;
 		else if ((r1 == NULL) || (r2 == NULL))
-			// En el if anterior nos aseguramos de
-			// que r1 != r2. Si uno es NULL, el
-			// otro entonces no lo será, luego
-			// son distintos.
+			// In the previous if we ensure that
+			// r1 != r2. If one is NULL, the
+			// other will not be, so they are different.
 			return false;
 		else {
 			return (r1->_elem == r2->_elem) &&
@@ -367,8 +362,8 @@ private:
 
 protected:
 	/** 
-	 Puntero a la raíz de la estructura jerárquica
-	 de nodos.
+	 Pointer to the root of the hierarchical structure
+	 of nodes.
 	 */
 	Nodo *_ra;
 };

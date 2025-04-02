@@ -1,8 +1,8 @@
 //
 //  TreeMap_Modificado_Modificado.h
 //
-//  Extensión de tablas <clave, valor> como árboles de búsqueda AVL
-//  con una operación para consultar el elemento K esimo
+//  Extension of <key, value> tables as AVL search trees
+//  with an operation to query the Kth element
 //
 #ifndef TreeMap_Modificado_MODOFOCADO_H_
 #define TreeMap_Modificado_MODOFOCADO_H_
@@ -62,20 +62,20 @@ public:
 protected:
 	
 	/**
-	Clase nodo que almacena internamente la pareja (clave, valor),
-	los punteros al hijo izquierdo y al hijo derecho, y la altura.
+	Node class that internally stores the (key, value) pair,
+	pointers to the left and right children, and the height.
 	*/
 	class TreeNode;
 	using Link = TreeNode *;
 
-	/** Puntero a la raíz de la estructura jerárquica de nodos. */
+	/** Pointer to the root of the hierarchical node structure. */
 	Link raiz;
 
-	/** Objeto función que compara elementos. */
+	/** Function object that compares elements. */
 	Comparador menor;
 
 public:
-	// iterador que recorre los pares <clave, valor> del árbol en inorden
+	// iterator that traverses the <key, value> pairs of the tree in inorder
 	class Iterator {
 	public:
 		ClaveValor const& operator*() const;
@@ -134,12 +134,12 @@ protected:
 
 	static void print(std::ostream & o, int indent, Link r);
 	/*
-		Funcion auxilir que sirve para hacer sumas del hijo derecho de un arbol
+		Auxiliary function that adds up the tam_i of the right child of a tree
 		O(log N)
 	*/
 	static int suma_der_tam_i(Link a);
 	/*
-		Funcion que busca el k-esimo , usa la funcion de suma_der_tam_i para comparar con la raiz.tam_i
+		Function that searches for the k-th element, uses the suma_der_tam_i function to compare with root.tam_i
 		O(log N)
 	*/
 	Clave const& Busca_k_esimo( int k, Link a);
@@ -222,10 +222,10 @@ void TreeMap_Modificado<Clave, Valor, Comparador>::print(std::ostream& o) const 
 		o << "vacio\n";
 }
 /*
-	Funcion que recibe por parametro un entero k ,
-	y se encarga de buscar el menor elemento k en el  arbol de busqueda
+	Function that receives an integer k as parameter,
+	and is responsible for finding the k-th smallest element in the search tree
 	
-	Complejidad : log(N)
+	Complexity: log(N)
 */
 template <typename Clave, typename Valor, typename Comparador>
 Clave const& TreeMap_Modificado<Clave, Valor, Comparador>::  k_esimo(int k) {
@@ -235,11 +235,11 @@ Clave const& TreeMap_Modificado<Clave, Valor, Comparador>::  k_esimo(int k) {
 
 			return  Busca_k_esimo(k, raiz);
 		}
-		else throw NotExistException("raiz nula");
+		else throw NotExistException("null root");
 	}
 	catch (NotExistException)
 	{
-		throw NotExistException("no existe k_esimo");
+		throw NotExistException("k-th element does not exist");
 	}
 }
 
@@ -345,17 +345,17 @@ typename TreeMap_Modificado<Clave, Valor, Comparador>::Link TreeMap_Modificado<C
 
 template <typename Clave, typename Valor, typename Comparador>
 void TreeMap_Modificado<Clave, Valor, Comparador>::Iterator::next() {
-	if (act_ == nullptr) throw std::out_of_range("El iterador no se puede avanzar");
+	if (act_ == nullptr) throw std::out_of_range("The iterator cannot be advanced");
 
-	// Si hay hijo derecho, saltamos al primero
-	// en inorden del hijo derecho
+	// If there is a right child, jump to the first
+	// in-order element of the right child
 	if (act_->dr)
 		act_ = first(act_->dr);
 	else {
-		// Si no, vamos al primer ascendiente
-		// no visitado. Para eso consultamos
-		// la pila; si ya est· vacÌa, no quedan
-		// ascendientes por visitar
+		// If not, go to the first unvisited
+		// ancestor. For that we check the
+		// stack; if it's already empty, there are no
+		// ancestors left to visit
 		if (ancestors.empty())
 			act_ = nullptr;
 		else {

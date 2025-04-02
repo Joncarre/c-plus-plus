@@ -11,7 +11,7 @@ using namespace std;
 void resuelve(int numElementos);
 TreeMap_Modificado<int, int> leerArbol(int numElementos);
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*LogN), donde N es el número de elementos leídos por la entrada
+// Complexity: O(N*LogN), where N is the number of elements read from the input
 TreeMap_Modificado<int, int> leerArbol(int numElementos){
 	TreeMap_Modificado<int, int> arbol;
 	int elem;
@@ -22,7 +22,7 @@ TreeMap_Modificado<int, int> leerArbol(int numElementos){
 	return arbol;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), donde N es el número de elementos del árbol (los leídos por la entrada)
+// Complexity: O(N*logN), where N is the number of elements in the tree (those read from the input)
 void resuelve(int numElementos){
 	TreeMap_Modificado<int, int> arbol;
 	arbol = leerArbol(numElementos);

@@ -14,7 +14,7 @@ bool ordenado(Arbin<int> arbol);
 bool esMayor(Arbin<int> arbol);
 int altura(Arbin<int> arbol);
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de elementos leídos por la entrada
+// Complexity: O(N), where N is the number of elements read from the input
 Arbin<int> leerArbol(){
 	int numero;
 	cin >> numero;
@@ -28,7 +28,7 @@ Arbin<int> leerArbol(){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de nodos (debe comprobar que todos los nodos cumplen la propiedad)
+// Complexity: O(N), where N is the number of nodes (it must check that all nodes meet the property)
 bool ordenado(Arbin<int> arbol){
 	if (arbol.esVacio())
 		return true;
@@ -43,7 +43,7 @@ bool ordenado(Arbin<int> arbol){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(1), simplemente tiene que acceder a los dos hijos para realizar la comprobación
+// Complexity: O(1), it simply has to access the two children to perform the check
 bool esMayor(Arbin<int> arbol){
 	/*
 	if (arbol.hijoIz().esVacio() && (arbol.hijoDr().esVacio() && arbol.hijoDr().raiz() > arbol.raiz()))
@@ -65,7 +65,7 @@ bool esMayor(Arbin<int> arbol){
 		return true;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de nodos que tiene el árbol
+// Complexity: O(N), where N is the number of nodes in the tree
 int altura(Arbin<int> arbol){
 	if (arbol.esVacio())
 		return 0;
@@ -73,7 +73,7 @@ int altura(Arbin<int> arbol){
 		return 1 + max(altura(arbol.hijoIz()), altura(arbol.hijoDr()));
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(N)
 bool equilibrado(Arbin<int> arbol){
 	if (arbol.esVacio())
 		return true;
@@ -88,7 +88,7 @@ bool equilibrado(Arbin<int> arbol){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(N)
 void resuelve(){
 	Arbin<int> arbol;
 	arbol = leerArbol();

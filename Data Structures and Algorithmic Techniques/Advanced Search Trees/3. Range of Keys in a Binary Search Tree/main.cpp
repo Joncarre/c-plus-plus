@@ -13,18 +13,18 @@ void resuelve(int numElementos);
 TreeMapRango<int, int> leerArbol(int numElementos);
 
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de elementos leídos por la entrada
+// Complexity: O(N), where N is the number of elements read from the input
 TreeMapRango<int, int> leerArbol(int numElementos){
 	TreeMapRango<int, int> arbol;
 	int nodo;
 	for (int i = 0; i < numElementos; i++){
 		cin >> nodo;
-		arbol.insert(nodo, 0); // La clave es lo que leemos por la entrada y el valor lo podemos poner a 0
+		arbol.insert(nodo, 0); // The key is what we read from the input and the value can be set to 0
 	}
 	return arbol;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: max(O(N) + O(log N)), por las funciones 'leerArbol' y 'rango', luego la complejidad es O(N)
+// Complexity: max(O(N) + O(log N)), due to the functions 'leerArbol' and 'rango', so the complexity is O(N)
 void resuelve(int numElementos){
 	TreeMapRango<int, int> arbol;
 	arbol = leerArbol(numElementos);
@@ -33,7 +33,7 @@ void resuelve(int numElementos){
 	cin >> k1; cin >> k2;
 
 	vector<int> lista;
-	lista = arbol.rango(k1, k2); // Obtenemos los elementos dentro del intervalo [k1, k2]
+	lista = arbol.rango(k1, k2); // Get the elements within the interval [k1, k2]
 
 	int N = lista.size();
 	

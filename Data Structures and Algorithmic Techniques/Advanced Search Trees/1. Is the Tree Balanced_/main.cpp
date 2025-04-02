@@ -13,22 +13,22 @@ bool equilibrado(Arbin<char> arbol);
 int altura(Arbin<char> arbol);
 
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de caracteres leídos por la entrada
+// Complexity: O(N), where N is the number of characters read from the input
 Arbin<char> leerArbol(){
 	char raiz;
 	cin >> raiz;
 
 	if (raiz == '.')
-		return Arbin<char>(); // Creamos un nodo vacío
+		return Arbin<char>(); // Create an empty node
 	else{
-		// Si no es vacío, entonces los siguientes nodos hijos dependerán de las llamadas recursivas
+		// If it's not empty, then the following child nodes will depend on recursive calls
 		const Arbin<char> &iz = leerArbol();
 		const Arbin<char> &dr = leerArbol();
-		return Arbin<char>(iz, raiz, dr); // Cuando hayan terminado las llamadas a todos los hijos, devolvemos cada nodo construido
+		return Arbin<char>(iz, raiz, dr); // When the calls to all children have finished, we return each constructed node
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O()
 bool equilibrado(Arbin<char> arbol){
 	if (arbol.esVacio())
 		return true;
@@ -43,7 +43,7 @@ bool equilibrado(Arbin<char> arbol){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de nodos del árbol
+// Complexity: O(N), where N is the number of nodes in the tree
 int altura(Arbin<char> arbol){
 	if (arbol.esVacio())
 		return 0;
@@ -51,7 +51,7 @@ int altura(Arbin<char> arbol){
 		return 1 + max(altura(arbol.hijoIz()), altura(arbol.hijoDr()));
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(), depende de la complejidad de 'equilibrado()'
+// Complexity: O(), depends on the complexity of 'equilibrado()'
 void resuelve(){
 	Arbin<char> arbol;
 
