@@ -10,14 +10,14 @@ using namespace std;
 
 void resuelve(int numCasos);
 // ------------------------------------------------------------------------------------------------------
-// Redefinición de 'operator' para el orden de la cola
+// Redefinition of 'operator' for queue ordering
 bool operator >= (tPaciente a, tPaciente b) {
 	if (b.gravedad < a.gravedad) return true;
 	else if (a.gravedad == b.gravedad && a.orden < b.orden) return true;
 	else return false;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), donde N es el número de elementos de la cola
+// Complexity: O(N*logN), where N is the number of elements in the queue
 void ColaUrgencias::insertar(std::string nombre, int gravedad){
 	paciente.nombre = nombre;
 	paciente.gravedad = gravedad;
@@ -25,22 +25,22 @@ void ColaUrgencias::insertar(std::string nombre, int gravedad){
 	elementos.push(paciente);
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(1)
+// Complexity: O(1)
 bool ColaUrgencias::esVacia() const{
 	return elementos.empty();
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(1)
+// Complexity: O(1)
 string ColaUrgencias::nombrePrimero() const{
 	return elementos.top().nombre;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(1)
+// Complexity: O(1)
 void ColaUrgencias::quitarPrimero(){
 	elementos.pop();	
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), por la función 'insertar'
+// Complexity: O(N*logN), due to the 'insertar' function
 void resuelve(int numCasos){
 	ColaUrgencias app;
 	char opcion;
@@ -49,11 +49,11 @@ void resuelve(int numCasos){
 
 	for (int i = 0; i < numCasos; i++){
 		cin >> opcion;
-		if (opcion == 'A'){ // Si leemos una "A"...
+		if (opcion == 'A'){ // If we read an "A"...
 			cout << app.nombrePrimero() << endl;
 			app.quitarPrimero();
 		}
-		else{ // Si leemos una "I"...
+		else{ // If we read an "I"...
 			cin >> nombre;
 			cin >> gravedad;
 			app.insertar(nombre, gravedad);

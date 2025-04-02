@@ -10,13 +10,13 @@ using namespace std;
 
 void resuelve();
 BinTree<int> leerArbol();
-bool esOrdenado(BinTree<int> arbol, int padre); // 'esOrdenado' quiere decir que se cumple que es de mínimos
-int altura(BinTree<int> arbol); // Función que devuelve la altura de un árbol
-bool esCompleto(BinTree<int> arbol); // Función que nos dice si un árbol es completo
-bool esSemiCompleto(BinTree<int> arbol); // Función que nos dice si un árbol es semicompleto
-bool esMonticulo(BinTree<int> arbol); // Función que nos dice si es un montículo
+bool esOrdenado(BinTree<int> arbol, int padre); // 'esOrdenado' means that it satisfies the min-heap property
+int altura(BinTree<int> arbol); // Function that returns the height of a tree
+bool esCompleto(BinTree<int> arbol); // Function that tells us if a tree is complete
+bool esSemiCompleto(BinTree<int> arbol); // Function that tells us if a tree is semi-complete
+bool esMonticulo(BinTree<int> arbol); // Function that tells us if it's a heap
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(logN  + 1), donde N es la altura del árbol semicompleto
+// Complexity: O(logN + 1), where N is the height of the semi-complete tree
 int altura(BinTree<int> arbol){
 	if (arbol.empty())
 		return 0;
@@ -24,7 +24,7 @@ int altura(BinTree<int> arbol){
 		return 1 + max(altura(arbol.left()) , altura(arbol.right()));
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de elementos que se leen por la entrada
+// Complexity: O(N), where N is the number of elements read from the input
 BinTree<int> leerArbol(){
 	BinTree<int> arbol;
 	int elemento;
@@ -40,7 +40,7 @@ BinTree<int> leerArbol(){
 	return arbol;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), tiene la misma complejidad que 'esCompleto'
+// Complexity: O(N), has the same complexity as 'esCompleto'
 bool esSemiCompleto(BinTree<int> arbol){
 	if (arbol.empty())
 		return true;
@@ -52,7 +52,7 @@ bool esSemiCompleto(BinTree<int> arbol){
 		);
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de nodos del árbol
+// Complexity: O(N), where N is the number of nodes in the tree
 bool esCompleto(BinTree<int> arbol){
 	if (arbol.empty())
 		return true;
@@ -64,7 +64,7 @@ bool esCompleto(BinTree<int> arbol){
 		);
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), donde N es el número de nodos que tiene el árbol
+// Complexity: O(N), where N is the number of nodes in the tree
 bool esOrdenado(BinTree<int> arbol, int padre){
 	if (arbol.empty())
 		return true;
@@ -78,7 +78,7 @@ bool esOrdenado(BinTree<int> arbol, int padre){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N), la mayor complejidad de las funciones a las que llama está en O(N), donde N es el número de nodos
+// Complexity: O(N), the highest complexity of the functions it calls is O(N), where N is the number of nodes
 bool esMonticulo(BinTree<int> arbol){
 	if (arbol.empty())
 		return true;
@@ -92,7 +92,7 @@ bool esMonticulo(BinTree<int> arbol){
 	else return false;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N)
+// Complexity: O(N)
 void resuelve(){
 	BinTree<int> arbol;
 	arbol = leerArbol();

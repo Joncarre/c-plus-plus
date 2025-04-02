@@ -1,11 +1,11 @@
 //
 //  BinTree.h
 //
-//  Implementación de árboles binarios (con compartición de nodos)
+//  Implementation of binary trees (with node sharing)
 //
-//  Técnicas Algoritmicas en Ingeniería del Software / Diseño de Algoritmos
-//  Facultad de Informática
-//  Universidad Complutense de Madrid
+//  Algorithmic Techniques in Software Engineering / Algorithm Design
+//  Faculty of Computer Science
+//  Complutense University of Madrid
 //
 //  Created by Alberto Verdejo on 30/6/15.
 //  Copyright (c) 2015 Alberto Verdejo. All rights reserved.
@@ -39,7 +39,7 @@ private:
 	Link root_;
 
 public:
-	// iterador que recorre el árbol en inorden
+	// iterator that traverses the tree in inorder
 	class Iterator {
 	public:
 		T const& operator*() const;
@@ -91,19 +91,19 @@ BinTree<T>::BinTree(Link const& r) : root_(r) {}
 
 template <typename T>
 T const& BinTree<T>::root() const {
-	if (empty()) throw std::domain_error("El árbol vacío no tiene raíz.");
+	if (empty()) throw std::domain_error("The empty tree has no root.");
 	else return root_->elem_;
 }
 
 template <typename T>
 BinTree<T> BinTree<T>::left() const {
-	if (empty()) throw std::domain_error("El árbol vacío no tiene hijo izquierdo.");
+	if (empty()) throw std::domain_error("The empty tree has no left child.");
 	else return BinTree<T>(root_->left_);
 }
 
 template <typename T>
 BinTree<T> BinTree<T>::right() const {
-	if (empty()) throw std::domain_error("El árbol vacío no tiene hijo derecho.");
+	if (empty()) throw std::domain_error("The empty tree has no right child.");
 	else return BinTree(root_->right_);
 }
 
@@ -136,7 +136,7 @@ typename BinTree<T>::Iterator BinTree<T>::Iterator::operator++(int) {
 template <typename T>
 void BinTree<T>::Iterator::next() {
 	if (ptr_ == nullptr) {
-		throw std::range_error("El iterador no puede avanzar");
+		throw std::range_error("The iterator cannot advance");
 	}
 	else {
 		if (ptr_->right_ != nullptr) {

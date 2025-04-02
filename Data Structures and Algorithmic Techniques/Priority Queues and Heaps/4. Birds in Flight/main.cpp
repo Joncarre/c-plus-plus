@@ -10,22 +10,22 @@ using namespace std;
 
 void resuelve(int edad, int parejas);
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(1)
 int PajarosEnVuelos::edadLider(){
 	return Lider;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(1)
 bool PajarosEnVuelos::son_Mayores_que_Lider(int a, int b){
 	return (a > Lider && b > Lider);
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(1)
 bool PajarosEnVuelos::son_Menores_que_Lider(int a, int b){
 	return (a < Lider && b < Lider);
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(log N)
 void PajarosEnVuelos::insertarPareja(int a, int b){
 	if (son_Menores_que_Lider(a, b)){
 		colaMaximos.push(a);
@@ -51,7 +51,7 @@ void PajarosEnVuelos::insertarPareja(int a, int b){
 	}
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O()
+// Complexity: O(N log N)
 void resuelve(int lider, int parejas){
 	int ave1, ave2;
 	PajarosEnVuelos app(lider);

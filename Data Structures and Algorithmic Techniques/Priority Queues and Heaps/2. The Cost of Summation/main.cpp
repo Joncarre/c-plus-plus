@@ -11,7 +11,7 @@ void resuelve(int elementos);
 PriorityQueue<long long> leerCola(int elementos);
 long long calculo(PriorityQueue<long long> cola);
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), donde N es el número de elementos leídos por la entrada
+// Complexity: O(N*logN), where N is the number of elements read from input
 PriorityQueue<long long> leerCola(int elementos){
 	PriorityQueue<long long> cola;
 	long long numero;
@@ -22,7 +22,7 @@ PriorityQueue<long long> leerCola(int elementos){
 	return cola;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), donde N es el número de elementos que tiene la cola
+// Complexity: O(N*logN), where N is the number of elements in the queue
 long long calculo(PriorityQueue<long long> cola){
 	long long sumando1 = 0, sumando2 = 0, suma = 0, costeTotal = 0;
 
@@ -33,8 +33,8 @@ long long calculo(PriorityQueue<long long> cola){
 			sumando2 = cola.top();
 			cola.pop();
 
-			suma = sumando1 + sumando2; // El resultado de la suma lo volvemos a meter en la cola
-			costeTotal += suma; // El coste total lo vamos acumulando
+			suma = sumando1 + sumando2; // The result of the sum is put back into the queue
+			costeTotal += suma; // The total cost is accumulated
 			cola.push(suma);
 		}
 		return costeTotal;
@@ -42,7 +42,7 @@ long long calculo(PriorityQueue<long long> cola){
 		return 0;
 }
 // ------------------------------------------------------------------------------------------------------
-// Complejidad: O(N*logN), es la mayor complejidad que manejan las funciones a las que llama
+// Complexity: O(N*logN), which is the highest complexity of the functions it calls
 void resuelve(int elementos){
 	PriorityQueue<long long> cola;
 	cola = leerCola(elementos);

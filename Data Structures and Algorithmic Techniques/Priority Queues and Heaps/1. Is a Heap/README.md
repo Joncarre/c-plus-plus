@@ -21,7 +21,7 @@ For each tree, YES will be written if it is a minimum stack and NO otherwise.
 
 **Output example**
 
-    SI
+    YES
     NO
     NO
 
