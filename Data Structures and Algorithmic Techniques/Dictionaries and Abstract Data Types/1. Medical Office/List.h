@@ -1,14 +1,14 @@
 /**
   @file Lista.h
 
-  Implementaci�n del TAD lista, utilizando una 
-  lista doblemente enlazada.
+  Implementation of the List ADT, using a 
+  doubly linked list.
 
-  Estructura de Datos y Algoritmos
-  Facultad de Inform�tica
-  Universidad Complutense de Madrid
+  Data Structures and Algorithms
+  Faculty of Informatics
+  Complutense University of Madrid
 
- (c) Marco Antonio G�mez Mart�n, 2012
+ (c) Marco Antonio Gómez Martín, 2012
 */
 #ifndef __LIST_H
 #define __LIST_H
@@ -17,32 +17,32 @@
 #include <cassert>
 
 /**
- Implementaci�n del TAD Lista utilizando una lista doblemente enlazada.
+ Implementation of the List ADT using a doubly linked list.
 
- Las operaciones son:
+ Operations are:
 
- - EmptyList: -> List. Generadora implementada en el
-   constructor sin par�metros.
- - Push_front: List, Elem -> List. Generadora.
- - push_back: List, Elem -> List. Modificadora.
- - front: List - -> Elem. Observadora parcial
- - pop_front: List - -> List. Modificadora parcial
- - back: List - -> Elem. Observadora parcial
- - pop_back: List - -> List. Modificadora parcial
- - empty: List -> Bool. Observadora
- - size: List -> Entero. Obervadora.
- - at: List, Entero - -> Elem. Observador parcial.
+ - EmptyList: -> List. Generator implemented in the
+   constructor without parameters.
+ - Push_front: List, Elem -> List. Generator.
+ - push_back: List, Elem -> List. Modifier.
+ - front: List - -> Elem. Partial observer
+ - pop_front: List - -> List. Partial modifier
+ - back: List - -> Elem. Partial observer
+ - pop_back: List - -> List. Partial modifier
+ - empty: List -> Bool. Observer
+ - size: List -> Integer. Observer.
+ - at: List, Integer - -> Elem. Partial observer.
 
- @author Marco Antonio G�mez Mart�n
+ @author Marco Antonio Gómez Martín
  */
 template <class T>
 class List {
 private:
 	/**
-	 Clase nodo que almacena internamente el elemento (de tipo T),
-	 y dos punteros, uno al nodo anterior y otro al nodo siguiente.
-	 Ambos punteros podr�an ser NULL si el nodo es el primero
-	 y/o �ltimo de la lista enlazada.
+	 Node class that internally stores the element (of type T),
+	 and two pointers, one to the previous node and one to the next node.
+	 Both pointers could be NULL if the node is the first
+	 and/or last of the linked list.
 	 */
 	class Nodo {
 	public:
@@ -58,20 +58,20 @@ private:
 
 public:
 
-	/** Constructor; operaci�n EmptyList. */
+	/** Constructor; EmptyList operation. */
 	List() : _prim(NULL), _ult(NULL), _numElems(0) {}
 
-	/** Destructor; elimina la lista doblemente enlazada. */
+	/** Destructor; removes the doubly linked list. */
 	~List() {
 		libera();
 	}
 
 	/**
-	 A�ade un nuevo elemento en la cabeza de la lista.
-	 Operaci�n generadora.
+	 Adds a new element at the head of the list.
+	 Generator operation.
 
-	 @param elem Elemento que se a�ade en la cabecera de
-	 la lista.
+	 @param elem Element to be added at the head of
+	 the list.
 	*/
 	void push_front(const T &elem) {
 		_prim = insertaElem(elem, NULL, _prim);
@@ -80,8 +80,8 @@ public:
 	}
 
 	/**
-	 A�ade un nuevo elemento al final de la lista (a la 
-	 "derecha"). Operaci�n modificadora.
+	 Adds a new element at the end of the list (to the 
+	 "right"). Modifier operation.
 
 	 push_back(e, EmptyList) = Cons(e, EmptyList)
 	 push_back(e, Push_front(x, xs)) = Push_front(x, push_back(e, xs))
@@ -93,14 +93,14 @@ public:
 	}
 
 	/**
-	 Devuelve el valor almacenado en la cabecera de la
-	 lista. Es un error preguntar por el primero de
-	 una lista vac�a.
+	 Returns the value stored at the head of the
+	 list. It is an error to ask for the first element of
+	 an empty list.
 
 	 front(Push_front(x, xs)) = x
 	 error front(EmptyList)
 
-	 @return Elemento en la cabecera de la lista.
+	 @return Element at the head of the list.
 	 */
 	const T &front() const {
 		if (empty())
@@ -109,15 +109,15 @@ public:
 	}
 
 	/**
-	 Devuelve el valor almacenado en la �ltima posici�n
-	 de la lista (a la derecha).
-	 Es un error preguntar por el primero de una lista vac�a.
+	 Returns the value stored at the last position
+	 of the list (to the right).
+	 It is an error to ask for the first element of an empty list.
 
-	 back(Push_front(x, xs)) = x           SI empty(xs)
-	 back(Push_front(x, xs)) = back(xs)  SI !empty(xs)
+	 back(Push_front(x, xs)) = x           IF empty(xs)
+	 back(Push_front(x, xs)) = back(xs)  IF !empty(xs)
 	 error back(EmptyList)
 
-	 @return Elemento en la cola de la lista.
+	 @return Element at the tail of the list.
 	 */
 	const T &back() const {
 		if (empty())
@@ -127,8 +127,8 @@ public:
 	}
 
 	/**
-	 Elimina el primer elemento de la lista.
-	 Es un error intentar obtener el resto de una lista vac�a.
+	 Removes the first element of the list.
+	 It is an error to try to get the rest of an empty list.
 
 	 pop_front(Push_front(x, xs)) = xs
 	 error pop_front(EmptyList)
@@ -145,11 +145,11 @@ public:
 	}
 
 	/**
-	 Elimina el �ltimo elemento de la lista.
-	 Es un error intentar obtener el inicio de una lista vac�a.
+	 Removes the last element of the list.
+	 It is an error to try to get the beginning of an empty list.
 
 	 inicio(Push_front(x, EmptyList)) = EmptyList
-	 inicio(Push_front(x, xs)) = Push_front(x, inicio(xs)) SI !empty(xs)
+	 inicio(Push_front(x, xs)) = Push_front(x, inicio(xs)) IF !empty(xs)
 	 error inicio(EmptyList)
 	*/
 	void pop_back() {
@@ -164,43 +164,43 @@ public:
 	}
 
 	/**
-	 Operaci�n observadora para saber si una lista
-	 tiene o no elementos.
+	 Observer operation to check if a list
+	 has elements or not.
 
 	 empty(EmptyList) = true
 	 empty(Push_front(x, xs)) = false
 
-	 @return true si la lista no tiene elementos.
+	 @return true if the list has no elements.
 	 */
 	bool empty() const {
 		return _prim == NULL;
 	}
 
 	/**
-	 Devuelve el n�mero de elementos que hay en la
-	 lista.
+	 Returns the number of elements in the
+	 list.
 	 size(EmptyList) = 0
 	 size(Push_front(x, xs)) = 1 + size(xs)
 
-	 @return N�mero de elementos.
+	 @return Number of elements.
 	 */
 	unsigned int size() const {
 		return _numElems;
 	}
 
 	/**
-	 Devuelve el elemento i-�simo de la lista, teniendo
-	 en cuenta que el primer elemento (first())
-	 es el elemento 0 y el �ltimo es size()-1,
-	 es decir idx est� en [0..size()-1].
-	 Operaci�n observadora parcial que puede fallar
-	 si se da un �ndice incorrecto. El �ndice es
-	 entero sin signo, para evitar que se puedan
-	 pedir elementos negativos.
+	 Returns the i-th element of the list, considering
+	 that the first element (first())
+	 is element 0 and the last is size()-1,
+	 i.e., idx is in [0..size()-1].
+	 Partial observer operation that can fail
+	 if an incorrect index is given. The index is
+	 an unsigned integer to prevent requesting
+	 negative elements.
 
 	 elem(0, Push_front(x, xs)) = x
-	 elem(n, Push_front(x, xs)) = elem(n-1, xs) si n > 0
-	 error elem(n, xs) si !( 0 <= n < size(xs) )
+	 elem(n, Push_front(x, xs)) = elem(n-1, xs) if n > 0
+	 error elem(n, xs) if !( 0 <= n < size(xs) )
 	*/
 	const T &at(unsigned int idx) const {
 		if (idx >= _numElems)
@@ -214,9 +214,9 @@ public:
 	}
 
 	/**
-	 Clase interna que implementa un iterador sobre
-	 la lista que permite recorrer la lista pero no
-	 permite cambiarlos.
+	 Internal class that implements an iterator over
+	 the list that allows traversing the list but does not
+	 allow changing them.
 	 */
 	class ConstIterator {
 	public:
@@ -254,21 +254,21 @@ public:
 		}
 
 	protected:
-		// Para que pueda construir objetos del
-		// tipo iterador
+		// So that it can build objects of the
+		// iterator type
 		friend class List;
 
 		ConstIterator() : _act(NULL) {}
 		ConstIterator(Nodo *act) : _act(act) {}
 
-		// Puntero al nodo actual del recorrido
+		// Pointer to the current node of the traversal
 		Nodo *_act;
 	};
 
 	/**
-	 Clase interna que implementa un iterador sobre
-	 la lista que permite recorrer la lista e incluso
-	 alterar el valor de sus elementos.
+	 Internal class that implements an iterator over
+	 the list that allows traversing the list and even
+	 altering the value of its elements.
 	 */
 	class Iterator {
 	public:
@@ -300,8 +300,8 @@ public:
 		}
 
 		T& operator*() {
-			// C�digo id�ntico al de elem() porque �ste es const,
-			// por lo que no se puede usar desde aqu�.
+			// Code identical to elem() because it is const,
+			// so it cannot be used from here.
 			if (_act == NULL) throw InvalidAccessException();
 			return _act->_elem;
 		}
@@ -318,46 +318,46 @@ public:
 		}
 
 	protected:
-		// Para que pueda construir objetos del
-		// tipo iterador
+		// So that it can build objects of the
+		// iterator type
 		friend class List;
 
 		Iterator() : _act(NULL) {}
 		Iterator(Nodo *act) : _act(act) {}
 
-		// Puntero al nodo actual del recorrido
+		// Pointer to the current node of the traversal
 		Nodo *_act;
 	};
 
 	/**
-	 Devuelve el iterador constante al principio de la lista.
-	 @return iterador al principio de la lista;
-	 coincidir� con cend() si la lista est� vac�a.
+	 Returns the constant iterator to the beginning of the list.
+	 @return iterator to the beginning of the list;
+	 will coincide with cend() if the list is empty.
 	 */
 	ConstIterator cbegin() const {
 		return ConstIterator(_prim);
 	}
 
 	/**
-	 @return Devuelve un iterador constante al final del recorrido
-	 (fuera de �ste).
+	 @return Returns a constant iterator to the end of the traversal
+	 (outside of it).
 	 */
 	ConstIterator cend() const {
 		return ConstIterator(NULL);
 	}
 
 	/**
-	 Devuelve el iterador no constante al principio de la lista.
-	 @return iterador al principio de la lista;
-	 coincidir� con end() si la lista est� vac�a.
+	 Returns the non-constant iterator to the beginning of the list.
+	 @return iterator to the beginning of the list;
+	 will coincide with end() if the list is empty.
 	 */
 	Iterator begin() {
 		return Iterator(_prim);
 	}
 
 	/**
-	 @return Devuelve un iterador no constante al final del recorrido
-	 (fuera de �ste).
+	 @return Returns a non-constant iterator to the end of the traversal
+	 (outside of it).
 	 */
 	Iterator end() const {
 		return Iterator(NULL);
@@ -365,23 +365,23 @@ public:
 
 
 	/**
-	 Permite eliminar de la lista el elemento
-	 apuntado por el iterador que se pasa como par�metro.
-	 El iterador recibido DEJA DE SER V�LIDO. En su
-	 lugar, deber� utilizarse el iterador devuelto, que
-	 apuntar� al siguiente elemento al borrado.
-	 @param it Iterador colocado en el elemento que se
-	 quiere borrar.
-	 @return Nuevo iterador colocado en el elemento siguiente
-	 al borrado (podr�a coincidir con final() si el
-	 elemento que se borr� era el �ltimo de la lista).
+	 Allows removing the element pointed to by the
+	 iterator passed as a parameter from the list.
+	 The received iterator BECOMES INVALID. Instead,
+	 the returned iterator should be used, which will
+	 point to the element following the deleted one.
+	 @param it Iterator positioned at the element to be
+	 deleted.
+	 @return New iterator positioned at the element following
+	 the deleted one (could coincide with final() if the
+	 deleted element was the last in the list).
 	 */
 	Iterator erase(const Iterator &it) {
 		if (it._act == NULL)
 			throw InvalidAccessException("Cannot erase specified element. Iterator pointing to NULL");
 
-		// Cubrimos los casos especiales donde
-		// borramos alguno de los extremos
+		// Cover special cases where
+		// we delete one of the ends
 		if (it._act == _prim) {
 			pop_front();
 			return Iterator(_prim);
@@ -389,7 +389,7 @@ public:
 			pop_back();
 			return Iterator(NULL);
 		} else {
-			// El elemento a borrar es interno a la lista.
+			// The element to be deleted is internal to the list.
 			Nodo *sig = it._act->_sig;
 			borraElem(it._act);
 			return Iterator(sig);
@@ -397,44 +397,44 @@ public:
 	}
 
 	/**
-	 M�todo para insertar un elemento en la lista
-	 en el punto marcado por el iterador. En concreto,
-	 se a�ade _justo antes_ que el elemento actual. Es
-	 decir, si it==l.primero(), el elemento insertado se
-	 convierte en el primer elemento (y el iterador
-	 apuntar� al segundo). Si it==l.final(), el elemento
-	 insertado ser� el �ltimo (e it seguir� apuntando
-	 fuera del recorrido).
-	 @param elem Valor del elemento a insertar.
-	 @param it Punto en el que insertar el elemento.
+	 Method to insert an element into the list
+	 at the point marked by the iterator. Specifically,
+	 it is added _just before_ the current element. That
+	 is, if it==l.primero(), the inserted element
+	 becomes the first element (and the iterator
+	 will point to the second). If it==l.final(), the inserted
+	 element will be the last (and it will still point
+	 outside the traversal).
+	 @param elem Value of the element to insert.
+	 @param it Point at which to insert the element.
 	 */
 	void insert(const T &elem, const Iterator &it) {
 
-		// Caso especial: �a�adir al principio?
+		// Special case: add at the beginning?
 		if (_prim == it._act) {
 			push_front(elem);
 		} else
-		// Caso especial: �a�adir al final?
+		// Special case: add at the end?
 		if (it._act == NULL) {
 			push_back(elem);
 		}
-		// Caso normal
+		// Normal case
 		else {
 			insertaElem(elem, it._act->_ant, it._act);
 		}
 	}
 
 	// //
-	// M�TODOS DE "FONTANER�A" DE C++ QUE HACEN VERS�TIL
-	// A LA CLASE
+	// C++ "PLUMBING" METHODS THAT MAKE THE CLASS
+	// VERSATILE
 	// //
 
-	/** Constructor copia */
+	/** Copy constructor */
 	List(const List<T> &other) : _prim(NULL), _ult(NULL) {
 		copia(other);
 	}
 
-	/** Operador de asignaci�n */
+	/** Assignment operator */
 	List<T> &operator=(const List<T> &other) {
 		if (this != &other) {
 			libera();
@@ -443,7 +443,7 @@ public:
 		return *this;
 	}
 
-	/** Operador de comparaci�n. */
+	/** Comparison operator. */
 	bool operator==(const List<T> &rhs) const {
 		if (_numElems != rhs._numElems)
 			return false;
@@ -475,8 +475,8 @@ protected:
 	}
 
 	void copia(const List<T> &other) {
-		// En vez de trabajar con punteros en la inserci�n,
-		// usamos ponDr
+		// Instead of working with pointers during insertion,
+		// we use ponDr
 		_prim = 0;
 		_numElems = 0;
 
@@ -491,13 +491,13 @@ private:
 
 
 	/**
-	 Inserta un elemento entre el nodo1 y el nodo2.
-	 Devuelve el puntero al nodo creado.
-	 Caso general: los dos nodos existen.
-	    nodo1->_sig == nodo2
-	    nodo2->_ant == nodo1
-	 Casos especiales: alguno de los nodos no existe
-	    nodo1 == NULL y/o nodo2 == NULL
+	 Inserts an element between node1 and node2.
+	 Returns the pointer to the created node.
+	 General case: both nodes exist.
+	    node1->_sig == node2
+	    node2->_ant == node1
+	 Special cases: one of the nodes does not exist
+	    node1 == NULL and/or node2 == NULL
 	*/
 	Nodo *insertaElem(const T &e, Nodo *nodo1, Nodo *nodo2) {
 		Nodo *nuevo = new Nodo(nodo1, e, nodo2);
@@ -510,11 +510,11 @@ private:
 	}
 
 	/**
-	 Elimina el nodo n. Si el nodo tiene nodos antes
-	 o despu�s, actualiza sus punteros anterior y siguiente.
-	 Caso general: hay nodos anterior y siguiente.
-	 Casos especiales: algunos de los nodos (anterior o siguiente
-	 a n) no existen.
+	 Deletes node n. If the node has nodes before
+	 or after, updates their previous and next pointers.
+	 General case: there are previous and next nodes.
+	 Special cases: some of the nodes (previous or next
+	 to n) do not exist.
 	*/
 	void borraElem(Nodo *n) {
 		assert(n != NULL);
@@ -529,12 +529,12 @@ private:
 	}
 
 	/**
-	 Elimina todos los nodos de la lista enlazada cuyo
-	 primer nodo se pasa como par�metro.
-	 Se admite que el nodo sea NULL (no habr� nada que
-	 liberar). En caso de pasarse un nodo v�lido,
-	 su puntero al nodo anterior debe ser NULL (si no,
-	 no ser�a el primero de la lista!).
+	 Deletes all nodes of the linked list whose
+	 first node is passed as a parameter.
+	 It is allowed for the node to be NULL (there will be nothing
+	 to free). If a valid node is passed,
+	 its pointer to the previous node must be NULL (otherwise,
+	 it would not be the first in the list!).
 	 */
 	static void libera(Nodo *prim) {
 		assert(!prim || !prim->_ant);
@@ -546,10 +546,10 @@ private:
 		}
 	}
 
-	// Puntero al primer y �ltimo elemento
+	// Pointer to the first and last element
 	Nodo *_prim, *_ult;
 
-	// N�mero de elementos (n�mero de nodos entre _prim y _ult)
+	// Number of elements (number of nodes between _prim and _ult)
 	unsigned int _numElems;
 };
 

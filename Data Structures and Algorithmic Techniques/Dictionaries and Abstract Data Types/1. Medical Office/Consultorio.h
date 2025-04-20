@@ -10,7 +10,7 @@ using namespace std;
 
 typedef	string medico;
 typedef string paciente;
-struct tFecha{ // Este tipo se debe declarar aquí arriba porque si no, no podría redefinirse la función 'operator'
+struct tFecha{ // This type must be declared up here, otherwise the 'operator' function could not be redefined
 	int dia;
 	int hora;
 	int min;
@@ -35,40 +35,40 @@ struct tFecha{ // Este tipo se debe declarar aquí arriba porque si no, no podría
 typedef class Consultorio{
 	public:
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(logN), donde N es el número de elementos en el TreeMap de médicos
+		// Complexity: O(logN), where N is the number of elements in the TreeMap of doctors
 		void nuevoMedico(medico nombreMedico){
-			if (!tMap.contains(nombreMedico)){ // Si no existe el médico, se crea un árbol vacío y se inserta
+			if (!tMap.contains(nombreMedico)){ // If the doctor does not exist, an empty tree is created and inserted
 				TreeMap<tFecha, paciente> subMap;
 				tMap.insert(nombreMedico, subMap);
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(logN), donde N es el número de nodos (¡siempre que el árbol esté equilibrado!)
+		// Complexity: O(logN), where N is the number of nodes (provided the tree is balanced!)
 		void pideConsulta(paciente nombrePaciente, medico nombreMedico, tFecha fecha){
 			if (!tMap.contains(nombreMedico)){
 				throw invalid_argument("Medico no existente.");
 			}
 			else{
 				TreeMap<tFecha, paciente> subMap;
-				subMap = tMap.at(nombreMedico); // Si el médico existe, dame su árbol de consultas
+				subMap = tMap.at(nombreMedico); // If the doctor exists, give me their consultation tree
 				if (subMap.contains(fecha)){
 					throw invalid_argument("Fecha ocupada.");
 				} 
 				else {
-					subMap.insert(fecha, nombrePaciente); // Insertamos la nueva consulta
-					tMap.insert(nombreMedico, subMap); // Y actualizamos el árbol del médico
+					subMap.insert(fecha, nombrePaciente); // Insert the new consultation
+					tMap.insert(nombreMedico, subMap); // And update the doctor's tree
 				}
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: igual
+		// Complexity: same
 		paciente siguientePaciente(medico nombreMedico){
 			if (!tMap.contains(nombreMedico)){
 				throw invalid_argument("Medico no existente.");
 			}
 			else{
 				TreeMap<tFecha, paciente> subMap;
-				subMap = tMap.at(nombreMedico); // Si el médico existe, dame su árbol de consultas
+				subMap = tMap.at(nombreMedico); // If the doctor exists, give me their consultation tree
 				if (subMap.empty()){
 					throw invalid_argument("No hay pacientes.");
 				}
@@ -79,28 +79,28 @@ typedef class Consultorio{
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: igual
+		// Complexity: same
 		void atiendeConsulta(medico nombreMedico){
 			if (!tMap.contains(nombreMedico)){
 				throw invalid_argument("Medico no existente.");
 			}
 			else{
 				TreeMap<tFecha, paciente> subMap;
-				subMap = tMap.at(nombreMedico); // Si el médico existe, dame su árbol de consultas
+				subMap = tMap.at(nombreMedico); // If the doctor exists, give me their consultation tree
 				if (subMap.empty()){
 					throw invalid_argument("No hay pacientes.");
 				}
 				else{
-					TreeMap<tFecha, paciente>::ConstIterator it = subMap.cbegin(); // Cogemos el primer paciente
-					subMap.erase(it.key()); // Lo eliminamos
-					tMap.insert(nombreMedico, subMap); // Y lo volvemos a insertar
+					TreeMap<tFecha, paciente>::ConstIterator it = subMap.cbegin(); // Get the first patient
+					subMap.erase(it.key()); // Remove it
+					tMap.insert(nombreMedico, subMap); // And update the doctor's map
 				}
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O()
+		// Complexity: O()
 		List<TreeMap<tFecha, paciente>> listaPacientes(medico nombreMedico, tFecha fecha){
-			List<TreeMap<tFecha, paciente>> lista; // Creamos una lista cuyos elementos serán nodos con el par (tFecha, paciente)
+			List<TreeMap<tFecha, paciente>> lista; // Create a list whose elements will be nodes with the pair (tFecha, paciente)
 			if (!tMap.contains(nombreMedico)){
 				throw invalid_argument("Medico no existente.");
 			}
@@ -109,7 +109,7 @@ typedef class Consultorio{
 				subMap = tMap.at(nombreMedico);
 				TreeMap<tFecha, paciente>::ConstIterator it = subMap.cbegin();
 				while (it != subMap.cend()){
-					if (it.key().dia == fecha.dia){ // Si el día coincide
+					if (it.key().dia == fecha.dia){ // If the day matches
 						TreeMap<tFecha, paciente> cita;
 						cita.insert(it.key(), it.value());
 						lista.push_front(cita);

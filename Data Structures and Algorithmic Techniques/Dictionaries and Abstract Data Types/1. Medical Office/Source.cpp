@@ -60,14 +60,14 @@ int main(){
 				cin >> nombreMedico; cin >> fecha.dia;
 				try{
 					List<TreeMap<tFecha, paciente>> lista = consultorio.listaPacientes(nombreMedico, fecha);
-					List<TreeMap<tFecha, paciente>>::ConstIterator itLista = lista.cbegin(); // Iterador para ir recorriendo la lista
-					cout << "Doctor " << nombreMedico << " dia " << fecha.dia << endl;
+					List<TreeMap<tFecha, paciente>>::ConstIterator itLista = lista.cbegin(); // Iterator to traverse the list
+					cout << \"Doctor \" << nombreMedico << \" dia \" << fecha.dia << endl;
 					while (itLista != lista.cend()){
 						TreeMap<tFecha, paciente> cita; 
 						cita = itLista.elem();
-						TreeMap<tFecha, paciente>::ConstIterator itCita = cita.cbegin(); // Iterador para mostrar los elementos de la lista, es decir, el par (tFecha, paciente)
-						cout << itCita.value() << " " << itCita.key().hora << ":" << itCita.key().min << endl; // Mostramos el paciente con su hora
-						itLista.next(); // Pasamos al siguiente elemento de la lista
+						TreeMap<tFecha, paciente>::ConstIterator itCita = cita.cbegin(); // Iterator to display the list elements, i.e., the pair (tFecha, paciente)
+						cout << itCita.value() << \" \" << itCita.key().hora << \":\" << itCita.key().min << endl; // Display the patient with their time
+						itLista.next(); // Move to the next element in the list
 					}
 				}
 				catch (invalid_argument& e){

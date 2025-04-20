@@ -25,7 +25,7 @@ void ejecutar(int num){
 		cin >> opcion;
 		// ---------------------------------------------------------
 		if (opcion == "EspacioMatic"){
-			// No sé qué coño hace
+			// I don't know what the hell this does
 		}
 		// ---------------------------------------------------------
 		else if (opcion == "nuevaNave"){

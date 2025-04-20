@@ -70,11 +70,11 @@ void ejecutar(int num){
 			try{
 				HashMap<string, int> HashMultaTramo = aplicacion.multasPorTramos(idTramo);
 				HashMap<string, int>::ConstIterator it = HashMultaTramo.cbegin();
-				while (it != HashMultaTramo.cend()){ // Vamos a recorrer todas las matrículas con multas del tramo 'idTramo'
-					for (int i = 0; i < it.value(); i++){ // Y vamos a mostrar la matrícula tantas veces como multas tengas en este tramo
+				while (it != HashMultaTramo.cend()){ // We will iterate through all license plates with fines in the section 'idTramo'
+					for (int i = 0; i < it.value(); i++){ // And we will display the license plate as many times as fines it has in this section
 						cout << it.key() << endl;
 					}
-					it.next(); // Pasamos a la siguiente matrícula
+					it.next(); // Move to the next license plate
 				}
 			}
 			catch (string error){

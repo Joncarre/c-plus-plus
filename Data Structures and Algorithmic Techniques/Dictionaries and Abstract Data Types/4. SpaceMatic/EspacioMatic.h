@@ -14,13 +14,13 @@ typedef int nivel;
 typedef int nada;
 typedef class Espacio{
 public:
-	// COMPLEJIDADES: m = naves, n = módulos
+	// COMPLEXITIES: m = ships, n = modules
 	// ----------------------------------------------------------------
 	void EspacioMatic(){
 
 	}
 	// ----------------------------------------------------------------
-	// Complejidad: O(1)
+	// Complexity: O(1)
 	void nuevaNave(idNave idnave){
 		if (naves.contains(idnave))
 			throw string("La nave ya existe.");
@@ -30,47 +30,47 @@ public:
 		}
 	}
 	// ----------------------------------------------------------------
-	// Complejidad: O(logn)
+	// Complexity: O(logn)
 	void equipaNave(idNave idnave, idModulo idmodulo, nivel nivelModulo){
 		if (!naves.contains(idnave))
 			throw string("La nave no existe.");
 		else{
 			HashMap<idNave, TreeMap<idModulo, nivel>>::Iterator itNave = naves.find(idnave);
-			if (itNave.value().contains(idmodulo)){ // Si tiene el módulo...
-				if (itNave.value().at(idmodulo) == 0){ // Si el módulo tiene nivel 0...
-					navesRotas.erase(idnave); // Es que esa nave estaba en 'navesRotas'. Y si estaba en 'navesRotas' la tenemos que quitar porque se va a reparar
+			if (itNave.value().contains(idmodulo)){ // If it has the module...
+				if (itNave.value().at(idmodulo) == 0){ // If the module has level 0...
+					navesRotas.erase(idnave); // It means that ship was in 'navesRotas'. And if it was in 'navesRotas' we have to remove it because it will be repaired
 				}
-				else{ // Si no tiene nivel 0...
-					// Entonces insertamos el módulo (se sustituirá) con el nivel que tenía + el nuevo nivel
+				else{ // If it doesn't have level 0...
+					// Then insert the module (it will be replaced) with the level it had + the new level
 					itNave.value().insert(idmodulo, itNave.value().at(idmodulo) + nivelModulo);
 				}
 			}
-			else{ // Y si no tiene el módulo...
+			else{ // And if it doesn't have the module...
 				itNave.value().insert(idmodulo, nivelModulo);
 			}
 		}
 	}
 	// ----------------------------------------------------------------
-	// Complejidad: O(logn)
+	// Complexity: O(logn)
 	bool estropeaNave(idNave idnave, idModulo idmodulo){
 		if (!naves.contains(idnave)){
 			throw string("La nave no existe.");
 		}
-		else{ // Si la nave existe...
+		else{ // If the ship exists...
 			HashMap<idNave, TreeMap<idModulo, nivel>>::Iterator itNaves = naves.find(idnave);
 			if (!itNaves.value().contains(idmodulo)){
 				throw string("El modulo no existe");
 				return false;
 			}
-			else{ // si el módulo existe...
+			else{ // if the module exists...
 				if (itNaves.value().at(idmodulo) == 0){
 					return false;
 				}
-				else{ // Si el nivel del módulo no es 0...
-					itNaves.value().insert(idmodulo, itNaves.value().at(idmodulo) - 1); // Insertamos el módulo pero restándole 1
-					if (itNaves.value().at(idmodulo) == 0){ // Si al restarle 1 ha llegado a 0 (se ha roto)...
-						if (!navesRotas.contains(idnave)){ // Si la nave NO tenía algún módulo roto...
-							navesRotas.insert(idnave, 0); // Le metemos en las naves rotas
+				else{ // If the module level is not 0...
+					itNaves.value().insert(idmodulo, itNaves.value().at(idmodulo) - 1); // Insert the module but subtract 1 from its level
+					if (itNaves.value().at(idmodulo) == 0){ // If subtracting 1 made it reach 0 (it broke)...
+						if (!navesRotas.contains(idnave)){ // If the ship did NOT have any broken module...
+							navesRotas.insert(idnave, 0); // Add it to the broken ships map
 						}
 					}
 					return true;
@@ -79,7 +79,7 @@ public:
 		}
 	}
 	// ----------------------------------------------------------------
-	// Complejidad: O(d), donde d es el número de naves rotas almacenadas en 'navesRotas'
+	// Complexity: O(d), where d is the number of broken ships stored in 'navesRotas'
 	List<idNave> navesDefectuosas(){
 		List<idNave> lista;
 		HashMap<idNave, nada>::ConstIterator itNavesRotas = navesRotas.cbegin();
@@ -90,7 +90,7 @@ public:
 		return lista;
 	}
 	// ----------------------------------------------------------------
-	// Complejidad: O(n)
+	// Complexity: O(n)
 	List<idModulo> modulosNave(idNave idnave){
 		if (!naves.contains(idnave))
 			throw string("La nave no existe.");

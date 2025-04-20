@@ -18,16 +18,16 @@ typedef class Aplicacion{
 	public:
 		//---------------------------------------------------------------------------------------------------------------------------------------------
 		void actualizarMultasTotales(string matricula){
-			if (HashMultasTotales.contains(matricula)){ // Si ya le habían puesto alguna otra multa (en este o en otro tramo)...
+			if (HashMultasTotales.contains(matricula)){ // If they had already received another fine (in this or another section)...
 				HashMap<string, int>::Iterator it = HashMultasTotales.find(matricula);
-				it.value()++; // Incrementamos su número de multas
+				it.value()++; // Increment their fine count
 			}
-			else{ // Si es la primera multa que le ponen...
-				HashMultasTotales.insert(matricula, 1); // Lo insertamos con su primera multa
+			else{ // If it's the first fine they receive...
+				HashMultasTotales.insert(matricula, 1); // Insert them with their first fine
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(1) por tratarse de una tabla Hash
+		// Complexity: O(1) because it's a Hash table
 		void insertaTramo(string tramo){
 			if (HashTramo.contains(tramo)){
 				throw string("El tramo ya existe.");
@@ -39,39 +39,39 @@ typedef class Aplicacion{
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(1) + O(logn), luego O(logn) porque tiene que insertar en el TreeMap 'camInicio'
+		// Complexity: O(1) + O(logn), therefore O(logn) because it has to insert into the TreeMap 'camInicio'
 		void fotoEntrada(string tramo, string matricula, int instante){
 			if (!HashTramo.contains(tramo)){
 				throw string("Tramo no existente.");
 			}
 			else{
-				HashMap<string, InfoTramo>::Iterator it = HashTramo.find(tramo); // Cogemos el tramo por el que entra el coche
-				it.value().camInicio.insert(matricula, instante); // Y lo insertamos en la cámara que capta los coches que entran en el tramo
+				HashMap<string, InfoTramo>::Iterator it = HashTramo.find(tramo); // Get the section the car enters
+				it.value().camInicio.insert(matricula, instante); // And insert it into the camera that captures cars entering the section
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(logn) porque tiene que buscar el instante en el que entró en el tramo, y esa búsqueda se hace en el TreeMap 'camInicio'
+		// Complexity: O(logn) because it has to search for the time it entered the section, and this search is done in the TreeMap 'camInicio'
 		void fotoSalida(string tramo, string matricula, int instante){
 			if (!HashTramo.contains(tramo)){
 				throw string("Tramo no existente.");
 			}
 			else{
-				HashMap<string, InfoTramo>::Iterator itTramo = HashTramo.find(tramo); // Cogemos el tramo por el que sale el coche
-				if (instante - itTramo.value().camInicio.at(matricula) < itTramo.value().tiempoMulta){ // Si el instante actual menos el instante en el que el coche atravesó el tunel es menor que 'tiempoMulta'...
-					// Entonces es que debemos ponerle una multa. Y consultamos si esa matricula ya tenía multas anteriormente
-					if (itTramo.value().HashMultasTramo.contains(matricula)){ // Si ya tenía multas...
+				HashMap<string, InfoTramo>::Iterator itTramo = HashTramo.find(tramo); // Get the section the car exits
+				if (instante - itTramo.value().camInicio.at(matricula) < itTramo.value().tiempoMulta){ // If the current time minus the time the car passed through the tunnel is less than 'tiempoMulta'...
+					// Then we must issue a fine. And we check if that license plate already had previous fines
+					if (itTramo.value().HashMultasTramo.contains(matricula)){ // If it already had fines...
 						HashMap<string, int>::Iterator itMultas = itTramo.value().HashMultasTramo.find(matricula);
-						itMultas.value()++; // Aumentamos su contador de multas en este tramo
+						itMultas.value()++; // Increase its fine counter in this section
 					}
-					else{ // Y si no tenía multas... Es que no estaba en el HashMultasTramo y hay que insetarlo
-						itTramo.value().HashMultasTramo.insert(matricula, 1); // Ahora esa matricula ya tiene 1 multa
+					else{ // And if it didn't have fines... It means it wasn't in HashMultasTramo and needs to be inserted
+						itTramo.value().HashMultasTramo.insert(matricula, 1); // Now that license plate has 1 fine
 					}
 					actualizarMultasTotales(matricula);
 				}
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(1) por realizar una búsqueda en una tabla Hash
+		// Complexity: O(1) for performing a search in a Hash table
 		int multasPorMatricula(string matricula){
 			if (!HashMultasTotales.contains(matricula)){
 				throw string("La matricula no tiene multas.");
@@ -82,7 +82,7 @@ typedef class Aplicacion{
 			}
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
-		// Complejidad: O(n) donde 'n' es el número de matriculas multadas en el 'tramo'
+		// Complexity: O(n) where 'n' is the number of fined license plates in the 'tramo'
 		HashMap<string, int> multasPorTramos(string tramo){
 			if (!HashTramo.contains(tramo)){
 				throw string("Tramo no existente");

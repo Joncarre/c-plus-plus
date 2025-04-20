@@ -22,7 +22,7 @@ typedef class Aplicacion{
 	public:
 		//---------------------------------------------------------------------------------------------------------------------------------------------
 		void nuevoLibro(ClaveLibro nombreLibro, int numEjemplares){
-			if (tHash.contains(nombreLibro)){ // Si el libro está en el sistema...
+			if (tHash.contains(nombreLibro)){ // If the book is in the system...
 				TreeMap<ClaveLibro, InfoLibro>::Iterator it = tHash.find(nombreLibro);
 				it.value().disponibles = it.value().disponibles + numEjemplares;
 			}
@@ -34,9 +34,9 @@ typedef class Aplicacion{
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------
 		void comprar(ClaveLibro nombreLibro){
-				// NOTA: Falta comprobar que el libro existe
+				// NOTE: Need to check if the book exists
 			TreeMap<ClaveLibro, InfoLibro>::Iterator it = tHash.find(nombreLibro);
-				if (it.value().disponibles == 0){ // Si no hay ejemplares...
+				if (it.value().disponibles == 0){ // If there are no copies...
 					throw out_of_range("No hay ejemplares.");
 				}
 				else{
