@@ -6,7 +6,7 @@ Here you'll find a collection of projects I've developed using the C++ programmi
 
 Feel free to explore the different sections:
 
-*   **Console Applications:** Classic games and utilities implemented for the command line.
+*   **Console Applications:** Classic games and utilities implemented for the command line mostly using arrays.
 *   **Data Structures and Algorithmic Techniques:** Solutions to problems focusing on fundamental computer science concepts.
 
 If you have any questions, suggestions, or feedback, please don't hesitate to reach out! 😊
