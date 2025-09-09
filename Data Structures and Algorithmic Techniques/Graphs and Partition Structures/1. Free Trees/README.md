@@ -29,7 +29,7 @@ For each test case we will write YES if the network is a free tree and NO otherw
 
 **Output example**
 
-    SI
+    YES
     NO
 
 **Author:** Alberto Verdejo.

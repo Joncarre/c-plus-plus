@@ -36,7 +36,7 @@ For each test case the word YES will be written in a separate line if the graph 
 
 **Output example**
 
-    SI
+    YES
     NO
 
 **Author:** Alberto Verdejo.
